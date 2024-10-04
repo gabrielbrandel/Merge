@@ -15,7 +15,8 @@ import { NumericFormat } from 'react-number-format';
 import axiosInstance from '../../../api/AxiosInstance';
 import { getInitialValues, getColumns } from './ColunasPagar';
 
-// Definir tema e consulta de mídia para detectar quando estamos em telas pequenas
+import CIcon from '@coreui/icons-react'
+import { cibAddthis, cilDelete, cilSearch } from '@coreui/icons'
 
 function EditToolbar({ setSelectedClient, setEdit, setCadastro }) {
   const handleClick = () => {
@@ -47,7 +48,6 @@ export default function FullFeaturedCrudGrid() {
 
   useEffect(() => {
     const fetchClients = async () => {
-      console.log('data:', 'cheguei')
       try {
         const response = await axiosInstance.get('CategoryExpense');
         setRows(response.data);
@@ -162,8 +162,8 @@ export default function FullFeaturedCrudGrid() {
     <Box
       sx={{
         marginLeft: '5px', marginRight: '5px',
-        backgroundColor: theme.palette.background.secondary,
-        color: theme.palette.text.secondary,
+        backgroundColor: theme.palette.background.paper.secondary,
+        color: theme.palette.text,
       }}
     >
       {!(cadastro || edit) && (
@@ -172,12 +172,45 @@ export default function FullFeaturedCrudGrid() {
           <TextField
             label="Pesquisar"
             variant="outlined"
-            fullWidth
             value={searchTerm}
             onChange={handleSearchChange}
-            sx={{ mb: 2 }}
+            sx={{
+              mb: 2,
+              marginRight: '2px',
+              ml: 0.5,
+              mr: 0.5,
+              width: 'calc(100% - 10px)',
+              // marginLeft: '5px',
+              // marginRight: '5px',
+              // Customizando a cor do rótulo, borda e texto
+              '& .MuiOutlinedInput-root': {
+                '& fieldset': {
+                  borderColor: 'white', // Cor da borda
+                },
+                '&:hover fieldset': {
+                  borderColor: 'white', // Cor da borda ao passar o mouse
+                },
+                '&.Mui-focused fieldset': {
+                  borderColor: 'white', // Cor da borda quando focado
+                },
+              },
+              '& .MuiInputLabel-root': {
+                color: 'white', // Cor do rótulo
+              },
+              '& .MuiInputBase-input': {
+                color: 'white', // Cor do texto digitado
+              },
+            }}
+            InputLabelProps={{
+              style: { color: 'white' }, // Cor do rótulo em modo focado
+            }}
           />
           <DataGrid
+            sx={{
+              marginLeft: '5px', marginRight: '5px',
+              // backgroundColor: theme.palette.background.paper.secondary,
+              color: 'white',
+            }}
             rows={filteredRows}
             columns={columns}
             slots={{
@@ -191,76 +224,318 @@ export default function FullFeaturedCrudGrid() {
       )}
 
       {(cadastro || edit) && (
-        <Box
-          sx={{
-            // display: 'flex',
-            // position: 'fixed',
-            // height: isMobile ? '70vh' : '100vh',
-            // width: isMobile ? '90%' : '140vh',
-            // top: 0,
-            // left: isMobile ? 0 : 240,
-            // right: 0,
-            // backgroundColor: 'background.paper',
-            // padding: 2,
-            // borderBottom: '1px solid #ddd',
-            backgroundColor: theme.palette.background.default,
-            color: theme.palette.text.primary,
-          }}
-        >
-          <Paper elevation={3} style={{ padding: '14px' }}>
-            <Typography variant="h6">{edit ? 'Atualizar Despesa' : 'Cadastrar Despesa'}</Typography>
+        <Box>
+          <Paper elevation={3} className="custom-paper" style={{ padding: '14px' }}>
+            <Typography variant="h6">{edit ? 'Atualizar Conta à Pagar' : 'Cadastrar Conta à Pagar'}</Typography>
             <Form
               onSubmit={handleUpdate}
               initialValues={initialValues}
               render={({ handleSubmit }) => (
                 <form onSubmit={handleSubmit}>
+
+                  <Box display="flex" flexDirection="row" gap={2}>
+                    <Box flex={0.040} marginTop={'20px'}>
+                      <CIcon icon={cilSearch} className="text-info" size="3xl" />
+                    </Box>
+                    <Box flex={1}>
+                      <Field name="fornecedor">
+                        {({ input }) => (
+                          <TextField
+                            label="Nome Fornecedor"
+                            {...input}
+                            fullWidth
+                            margin="normal"
+                            InputLabelProps={{
+                              shrink: true,
+                            }}
+                          />
+                        )}
+                      </Field>
+                    </Box>
+                    <Box flex={0.040} marginTop={'20px'}>
+                      <CIcon icon={cilDelete} className="text-danger" size="3xl" />
+                    </Box>
+                  </Box>
+                  
+                  <Box display="flex" flexDirection="row" gap={2}>
+                    <Box flex={0.045} marginTop={'19px'} >
+                      <CIcon icon={cibAddthis} className="text-success" size="3xl" />
+                    </Box>
+                    <Box flex={1}>
+                      <Field name="tipo">
+                        {({ input }) => (
+                          <TextField
+                            label="Tipo de Conta"
+                            {...input}
+                            fullWidth
+                            margin="normal"
+                            InputLabelProps={{
+                              shrink: true,
+                            }}
+                          />
+                        )}
+                      </Field>
+                    </Box>
+                    <Box flex={0.045} marginTop={'19px'}>
+                      <CIcon icon={cibAddthis} className="text-success" size="3xl" />
+                    </Box>
+                    <Box flex={1}>
+                      <Field name="grupo">
+                        {({ input }) => (
+                          <TextField
+                            label="Grupo de Conta"
+                            {...input}
+                            fullWidth
+                            margin="normal"
+                            InputLabelProps={{
+                              shrink: true,
+                            }}
+                          />
+                        )}
+                      </Field>
+                    </Box>
+                  </Box>
+                  <Box display="flex" flexDirection="row" gap={2}>
+                    <Box flex={0.045} marginTop={'19px'}>
+                      <CIcon icon={cibAddthis} className="text-success" size="3xl" />
+                    </Box>
+                    <Box flex={1}>
+                      <Field name="subgrupo">
+                        {({ input }) => (
+                          <TextField
+                            label="SubGrupo de Conta"
+                            {...input}
+                            fullWidth
+                            margin="normal"
+                            InputLabelProps={{
+                              shrink: true,
+                            }}
+                          />
+                        )}
+                      </Field>
+                    </Box>
+                    <Box flex={0.045} marginTop={'19px'}>
+                      <CIcon icon={cibAddthis} className="text-success" size="3xl" />
+                    </Box>
+                    <Box flex={1}>
+                      <Field name="conta">
+                        {({ input }) => (
+                          <TextField
+                            label="Conta"
+                            {...input}
+                            fullWidth
+                            margin="normal"
+                            InputLabelProps={{
+                              shrink: true,
+                            }}
+                          />
+                        )}
+                      </Field>
+                    </Box>
+                  </Box>
+
+                  <Box display="flex" flexDirection="row" gap={2}>
+                    <Box flex={0.03} marginTop={'19px'}>
+                      <CIcon icon={cibAddthis} className="text-success" size="3xl" />
+                    </Box>
+                    <Box flex={1}>
+                      <Field name="centrodecusto">
+                        {({ input }) => (
+                          <TextField
+                            label="Centro de Custo"
+                            {...input}
+                            fullWidth
+                            margin="normal"
+                            InputLabelProps={{
+                              shrink: true,
+                            }}
+                          />
+                        )}
+                      </Field>
+                    </Box>
+                  </Box>
+                  <Box display="flex" flexDirection="row" gap={2}>
+                    <Box flex={1}>
+                      <Field name="numeroidentificador">
+                        {({ input }) => (
+                          <TextField
+                            label="Número Identificador"
+                            {...input}
+                            fullWidth
+                            margin="normal"
+                            InputLabelProps={{
+                              shrink: true,
+                            }}
+                          />
+                        )}
+                      </Field>
+                    </Box>
+                    <Box flex={1}>
+                      <Field name="numerodocumento">
+                        {({ input }) => (
+                          <TextField
+                            label="Número Documento"
+                            {...input}
+                            fullWidth
+                            margin="normal"
+                            InputLabelProps={{
+                              shrink: true,
+                            }}
+                          />
+                        )}
+                      </Field>
+                    </Box>
+                    <Box flex={2} marginTop={-1.9}>
+                      <Field name="price">
+                        {({ input, meta }) => (
+                          <FormControl fullWidth margin="normal">
+                            <NumericFormat
+                              {...input}
+                              customInput={TextField}
+                              label="Valor"
+                              thousandSeparator=","
+                              decimalSeparator="."
+                              prefix="R$ "
+                              onValueChange={(values) => {
+                                input.onChange(values.value);
+                              }}
+                            />
+                            {meta.touched && meta.error && <div style={{ color: 'red' }}>{meta.error}</div>}
+                          </FormControl>
+                        )}
+                      </Field>
+                    </Box>                    
+                    <Box flex={1}>
+                      <Field name="parcelas">
+                        {({ input }) => (
+                          <TextField
+                            label="Parcelas"
+                            {...input}
+                            fullWidth
+                            margin="normal"
+                            InputLabelProps={{
+                              shrink: true,
+                            }}
+                          />
+                        )}
+                      </Field>
+                    </Box>
+                  </Box>
+
                   <Field name="name">
                     {({ input }) => (
                       <TextField
-                        label="Nome"
+                        label="Descrição do Documento"
                         {...input}
                         fullWidth
                         margin="normal"
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
                       />
                     )}
                   </Field>
-                  <Field name="price">
-                    {({ input, meta }) => (
-                      <FormControl fullWidth margin="normal">
-                        <NumericFormat
-                          {...input}
-                          customInput={TextField}
-                          label="Preço"
-                          thousandSeparator=","
-                          decimalSeparator="."
-                          prefix="R$ "
-                          onValueChange={(values) => {
-                            input.onChange(values.value);
-                          }}
-                        />
-                        {meta.touched && meta.error && <div style={{ color: 'red' }}>{meta.error}</div>}
-                      </FormControl>
+                  <Field name="codigobarrasdocumento">
+                    {({ input }) => (
+                      <TextField
+                        label="Codigo de barras do documento"
+                        {...input}
+                        fullWidth
+                        margin="normal"
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                      />
                     )}
                   </Field>
                   <Box display="flex" flexDirection="row" gap={2}>
                     <Box flex={1}>
+                      <Field name="competencia">
+                        {({ input }) => (
+                          <TextField
+                            type="date"
+                            label="Competência"
+                            {...input}
+                            fullWidth
+                            margin="normal"
+                            InputLabelProps={{
+                              shrink: true, 
+                            }}
+                          />
+                        )}
+                      </Field>
+                    </Box>
+                    <Box flex={1}>
+                      <Field name="dataemissao">
+                        {({ input }) => (
+                          <TextField
+                            type="date"
+                            label="Emissão"
+                            {...input}
+                            fullWidth
+                            margin="normal"
+                            InputLabelProps={{
+                              shrink: true, 
+                            }}
+                          />
+                        )}
+                      </Field>
+                    </Box>
+                    <Box flex={1}>
+                      <Field name="datavencimento">
+                        {({ input }) => (
+                          <TextField
+                            type="date"
+                            label="Vencimento"
+                            {...input}
+                            fullWidth
+                            margin="normal"
+                            InputLabelProps={{
+                              shrink: true, 
+                            }}
+                          />
+                        )}
+                      </Field>
+                    </Box>
+                  </Box>
+
+                  <Box display="flex" flexDirection="row" gap={1} justifyContent="flex-end" marginTop={1} >
+                    <Box flex={0}>
                       <Button
                         variant="contained"
                         color="primary"
                         type="submit"
-                        style={{ marginBottom: '8px', width: '100%' }}
+                        style={{ width: '100%' }}
+                        sx={{
+                          mb: 2,
+                          width: '100%',
+                          backgroundColor: '#006400', 
+                          color: '#ffffff', 
+                          '&:hover': {
+                            backgroundColor: '#006400',
+                          },
+                        }}                        
                       >
                         {edit ? 'Salvar Alterações' : 'Cadastrar'}
                       </Button>
                     </Box>
-                    <Box flex={1}>
+                    <Box flex={0}>
                       <Button
                         variant="outlined"
                         color="default"
                         onClick={handleCancel}
                         style={{ width: '100%' }}
+                        sx={{
+                          mb: 2,
+                          width: '100%',
+                          backgroundColor: '#8B0000',
+                          color: '#ffffff', 
+                          '&:hover': {
+                            backgroundColor: '#8B0000', 
+                          },
+                        }}
                       >
-                        Cancelar
+                        Fechar
                       </Button>
                     </Box>
                   </Box>
@@ -273,3 +548,19 @@ export default function FullFeaturedCrudGrid() {
     </Box>
   );
 }
+
+// name: editRows?.name || '',
+//   fornecedor: editRows?.name || '',
+//     price: editRows?.price || 0,
+//       tipo: editRows?.tipo || '',
+//         grupo: editRows?.grupo || '',
+//           conta: editRows?.conta || '',
+//             subgrupo: editRows?.subgrupo || '',
+//               centrodecusto: editRows?.centrodecusto || '',
+//                 numerodocumento: editRows?.numerodocumento || 0,
+//                   numeroidentificador: editRows?.numeroidentificador || 0,
+//                     parcelas: editRows?.parcelas || 0,
+//                       codigobarrasdocumento: editRows?.codigobarrasdocumento || 0,
+//                         competencia: editRows?.competencia || '',
+//                           dataemissao: editRows?.dataemissao || '',
+//                             datavencimento: editRows?.datavencimento || '',

@@ -2,14 +2,20 @@ import React from 'react';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/DeleteOutlined';
 import { GridActionsCellItem } from '@mui/x-data-grid';
+import { cibBlackberry } from '@coreui/icons';
 // import { formatDate } from '../../utils/FormatData';
+// const theme = useTheme();
+import './index.scss'
 
 export const getColumns = (handleEditClick, handleDeleteClick) => [
   {
+    color: '#000000',
+    backgroundColor: '#000000',
     field: 'actions',
     type: 'actions',
     headerName: 'Ações',
     width: 100,
+    headerClassName: 'custom-header', 
     getActions: ({ id }) => [
       <GridActionsCellItem
         icon={<EditIcon />}
@@ -25,9 +31,9 @@ export const getColumns = (handleEditClick, handleDeleteClick) => [
       />,
     ],
   },
-  { field: 'name', headerName: 'Nome', flex: 1, minwidth: 180 },
+  { field: 'name', headerName: 'Nome', flex: 1, minwidth: 180, headerClassName: 'custom-header', },
   {
-    field: 'price', headerName: 'Preço', flex: 1, type: 'number', minWidth: 130, headerAlign: 'left', align: 'left', valueFormatter: (params) => {
+    field: 'price', headerName: 'Preço', flex: 1, type: 'number', minWidth: 130, headerAlign: 'left', align: 'left', headerClassName: 'custom-header',valueFormatter: (params) => {
       const value = parseFloat(params);
 
       if (!isNaN(value)) {
@@ -45,7 +51,20 @@ export const getInitialValues = (edit, editRows) => {
   return {
     ...(edit ? { id: editRows?.id || '' } : {}),
     name: editRows?.name || '',
+    fornecedor: editRows?.name || '',
     price: editRows?.price || 0,
+    tipo: editRows?.tipo || '',
+    grupo: editRows?.grupo || '',
+    conta: editRows?.conta || '',
+    subgrupo: editRows?.subgrupo || '',
+    centrodecusto: editRows?.centrodecusto || '',
+    numerodocumento: editRows?.numerodocumento || 0,
+    numeroidentificador: editRows?.numeroidentificador || 0,
+    parcelas: editRows?.parcelas || 1,
+    codigobarrasdocumento: editRows?.codigobarrasdocumento || 0,
+    competencia: editRows?.competencia || '',
+    dataemissao: editRows?.dataemissao || '',
+    datavencimento: editRows?.datavencimento || '',
   };
 };
 
