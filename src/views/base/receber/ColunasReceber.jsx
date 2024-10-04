@@ -15,7 +15,7 @@ export const getColumns = (handleEditClick, handleDeleteClick) => [
     type: 'actions',
     headerName: 'Ações',
     width: 100,
-    headerClassName: 'custom-header', 
+    headerClassName: 'custom-header',
     getActions: ({ id }) => [
       <GridActionsCellItem
         icon={<EditIcon />}

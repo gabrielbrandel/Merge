@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   CCard,
   CCardBody,
@@ -12,14 +12,33 @@ import {
   CTableHead,
   CTableHeaderCell,
   CTableRow,
+  CFormLabel,
+  CFormFeedback,
+  CFormInput,
 } from '@coreui/react'
+import axiosInstance from '../../../api/AxiosInstance';
+import TextField from '@mui/material/TextField';
 
 export const TableReceber = () => {
-  const items = [
-    { id: 1, name: 'John Doe', status: 'Active', role: 'Admin' },
-    { id: 2, name: 'Jane Smith', status: 'Inactive', role: 'Member' },
-    { id: 3, name: 'Sam Wilson', status: 'Pending', role: 'Staff' },
-  ];
+  const [searchTerm, setSearchTerm] = useState('');
+  const [rows, setRows] = useState([]);
+
+  useEffect(() => {
+    const fetchClients = async () => {
+      try {
+        const response = await axiosInstance.get('CategoryExpense');
+        setRows(response.data);
+      } catch (error) {
+        console.error('Error fetching customers:', error);
+      }
+    };
+
+    fetchClients();
+  }, []);
+
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
 
   return (
     <CRow>
@@ -28,23 +47,38 @@ export const TableReceber = () => {
           <CCardHeader>
             <strong>Contas a Receber</strong>
           </CCardHeader>
+          <CCol md={12}>
+            <CFormLabel htmlFor="validationCustom01" style={{
+              marginLeft: '10px',
+              marginTop: '10px',
+              padding: 0,
+              display: 'flex',
+            }} >Pesquisar</CFormLabel>
+            <CFormInput type="text" id="validationCustom01" defaultValue="" style={{
+              height: '36px',
+              width: '97%',
+              marginLeft: '10px',
+              padding: 0,
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }} />
+          </CCol>
           <CCardBody>
             <CTable>
               <CTableHead>
                 <CTableRow>
-                  <CTableHeaderCell scope="col">Coluna 0</CTableHeaderCell>
-                  <CTableHeaderCell scope="col">Coluna 1</CTableHeaderCell>
-                  <CTableHeaderCell scope="col">Coluna 2</CTableHeaderCell>
-                  <CTableHeaderCell scope="col">Coluna 3</CTableHeaderCell>
+                  <CTableHeaderCell scope="col">Id</CTableHeaderCell>
+                  <CTableHeaderCell scope="col">Nome</CTableHeaderCell>
+                  <CTableHeaderCell scope="col">Preço</CTableHeaderCell>
                 </CTableRow>
               </CTableHead>
               <CTableBody>
-                {items.map((item) => (
-                  <CTableRow key={item.id}>
-                    <CTableDataCell>{item.id}</CTableDataCell>
-                    <CTableDataCell>{item.name}</CTableDataCell>
-                    <CTableDataCell>{item.status}</CTableDataCell>
-                    <CTableDataCell>{item.role}</CTableDataCell>
+                {rows.map((row) => (
+                  <CTableRow key={row.id}>
+                    <CTableDataCell>{row.id}</CTableDataCell>
+                    <CTableDataCell>{row.name}</CTableDataCell>
+                    <CTableDataCell>{row.price}</CTableDataCell>
                   </CTableRow>
                 ))}
               </CTableBody>

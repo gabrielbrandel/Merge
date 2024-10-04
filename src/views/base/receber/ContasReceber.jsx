@@ -231,7 +231,7 @@ export default function ContasAReceber() {
           </Box>
       )}
 
-      {/* <TableReceber/> */}
+      <TableReceber/>
     </Box>
   );
 }
