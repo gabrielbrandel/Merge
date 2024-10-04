@@ -242,8 +242,8 @@ const InputGroup = () => {
               </CInputGroup>
               <CInputGroup className="mb-3">
                 <CFormInput
-                  placeholder="Recipient's username"
-                  aria-label="Recipient's username"
+                  placeholder="Recipient's usernames"
+                  aria-label="Recipient's usernames"
                   aria-describedby="button-addon2"
                 />
                 <CButton type="button" color="secondary" variant="outline" id="button-addon2">

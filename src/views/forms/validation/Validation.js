@@ -1,4 +1,7 @@
 import React, { useState } from 'react'
+import Box from '@mui/material/Box';
+import { NumericFormat } from 'react-number-format';
+
 import {
   CButton,
   CCard,
@@ -18,7 +21,10 @@ import {
 } from '@coreui/react'
 import { DocsExample } from 'src/components'
 
-const CustomStyles = () => {
+import CIcon from '@coreui/icons-react'
+import { cibAddthis, cilDelete, cilSearch } from '@coreui/icons'
+
+export const CustomStyles = () => {
   const [validated, setValidated] = useState(false)
   const handleSubmit = (event) => {
     const form = event.currentTarget
@@ -35,62 +41,237 @@ const CustomStyles = () => {
       validated={validated}
       onSubmit={handleSubmit}
     >
-      <CCol md={4}>
-        <CFormLabel htmlFor="validationCustom01">Email</CFormLabel>
-        <CFormInput type="text" id="validationCustom01" defaultValue="Mark" required />
-        <CFormFeedback valid>Looks good!</CFormFeedback>
-      </CCol>
-      <CCol md={4}>
-        <CFormLabel htmlFor="validationCustom02">Email</CFormLabel>
-        <CFormInput type="text" id="validationCustom02" defaultValue="Otto" required />
-        <CFormFeedback valid>Looks good!</CFormFeedback>
-      </CCol>
-      <CCol md={4}>
-        <CFormLabel htmlFor="validationCustomUsername">Username</CFormLabel>
-        <CInputGroup className="has-validation">
-          <CInputGroupText id="inputGroupPrepend">@</CInputGroupText>
-          <CFormInput
-            type="text"
-            id="validationCustomUsername"
-            defaultValue=""
-            aria-describedby="inputGroupPrepend"
-            required
-          />
-          <CFormFeedback invalid>Please choose a username.</CFormFeedback>
-        </CInputGroup>
-      </CCol>
-      <CCol md={6}>
-        <CFormLabel htmlFor="validationCustom03">City</CFormLabel>
-        <CFormInput type="text" id="validationCustom03" required />
-        <CFormFeedback invalid>Please provide a valid city.</CFormFeedback>
-      </CCol>
-      <CCol md={3}>
-        <CFormLabel htmlFor="validationCustom04">City</CFormLabel>
+      <CInputGroup className="mb-2">
+
+        <CButton
+          type="button"
+          color="secondary"
+          variant="ghost"
+          id="inputGroupFileAddon03"
+          style={{
+            height: '35px',
+            width: '35px',
+            marginTop: '35px',
+            marginRight: '5px',
+            marginLeft: '10px',
+            marginLeft: '10px',
+            padding: 0,
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}
+        >
+          <CIcon icon={cilSearch} className="text-info" size="lg" style={{
+            height: '35px',
+            width: '35px',
+          }} />
+        </CButton>
+
+        <CCol md={11}>
+          <CFormLabel htmlFor="validationCustom01">Fornecedor</CFormLabel>
+          <CFormInput type="text" id="validationCustom01" defaultValue="Mark" required />
+          <CFormFeedback valid>Looks good!</CFormFeedback>
+        </CCol>
+      </CInputGroup>
+
+      <CButton
+        type="button"
+        color="secondary"
+        variant="ghost"
+        id="inputGroupFileAddon03"
+        style={{
+          height: '35px',
+          width: '35px',
+          marginTop: '48px',
+          marginRight: '5px',
+          marginLeft: '10px',
+          marginLeft: '10px',
+          padding: 0,
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center'
+        }}
+      >
+        <CIcon icon={cibAddthis} className="text-success" size="lg" style={{
+          height: '35px',
+          width: '35px',
+        }} />
+      </CButton>
+      <CCol md={5}>
+        <CFormLabel htmlFor="validationCustom01">Tipo de Conta</CFormLabel>
         <CFormSelect id="validationCustom04">
           <option disabled>Choose...</option>
           <option>...</option>
         </CFormSelect>
         <CFormFeedback invalid>Please provide a valid city.</CFormFeedback>
       </CCol>
+
+      <CButton
+        type="button"
+        color="secondary"
+        variant="ghost"
+        id="inputGroupFileAddon03"
+        style={{
+          height: '35px',
+          width: '35px',
+          marginTop: '48px',
+          marginRight: '5px',
+          marginLeft: '10px',
+          padding: 0,
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center'
+        }}
+      >
+        <CIcon icon={cibAddthis} className="text-success" size="lg" style={{
+          height: '35px',
+          width: '35px',
+        }} />
+      </CButton>
+      <CCol md={6}>
+        <CFormLabel htmlFor="validationCustom02">Grupo de Conta</CFormLabel>
+        <CFormSelect id="validationCustom04">
+          <option disabled>Choose...</option>
+          <option>...</option>
+        </CFormSelect>
+        <CFormFeedback invalid>Please provide a valid city.</CFormFeedback>
+      </CCol>
+
+      <CButton
+        type="button"
+        color="secondary"
+        variant="ghost"
+        id="inputGroupFileAddon03"
+        style={{
+          height: '35px',
+          width: '35px',
+          marginTop: '48px',
+          marginRight: '5px',
+          marginLeft: '10px',
+          padding: 0,
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center'
+        }}
+      >
+        <CIcon icon={cibAddthis} className="text-success" size="lg" style={{
+          height: '35px',
+          width: '35px',
+        }} />
+      </CButton>
+      <CCol md={5}>
+        <CFormLabel htmlFor="validationCustomUsername">SubGrupo de Conta</CFormLabel>
+        <CFormSelect id="validationCustom04">
+          <option disabled>Choose...</option>
+          <option>...</option>
+        </CFormSelect>
+        <CFormFeedback invalid>Please provide a valid city.</CFormFeedback>
+      </CCol>
+
+      <CButton
+        type="button"
+        color="secondary"
+        variant="ghost"
+        id="inputGroupFileAddon03"
+        style={{
+          height: '35px',
+          width: '35px',
+          marginTop: '48px',
+          marginRight: '5px',
+          marginLeft: '10px',
+          padding: 0,
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center'
+        }}
+      >
+        <CIcon icon={cibAddthis} className="text-success" size="lg" style={{
+          height: '35px',
+          width: '35px',
+        }} />
+      </CButton>
+      <CCol md={6}>
+        <CFormLabel htmlFor="validationCustomUsername">Conta</CFormLabel>
+        <CFormSelect id="validationCustom04">
+          <option disabled>Choose...</option>
+          <option>...</option>
+        </CFormSelect>
+        <CFormFeedback invalid>Please provide a valid city.</CFormFeedback>
+      </CCol>
+
       <CCol md={3}>
-        <CFormLabel htmlFor="validationCustom05">City</CFormLabel>
+        <CFormLabel htmlFor="validationCustom05">Número Identificador</CFormLabel>
         <CFormInput type="text" id="validationCustom05" required />
         <CFormFeedback invalid>Please provide a valid zip.</CFormFeedback>
       </CCol>
-      <CCol xs={12}>
-        <CFormCheck
-          type="checkbox"
-          id="invalidCheck"
-          label="Agree to terms and conditions"
+      <CCol md={3}>
+        <CFormLabel htmlFor="validationCustom05">Número Documento</CFormLabel>
+        <CFormInput type="text" id="validationCustom05" required />
+        <CFormFeedback invalid>Please provide a valid zip.</CFormFeedback>
+      </CCol>
+
+
+      <CCol md={3}>
+        <CFormLabel htmlFor="validationCustom05">Valor</CFormLabel>
+        <NumericFormat
+          id="validationCustom05"
+          customInput={CFormInput} // Usa o CFormInput para manter o estilo padrão
+          thousandSeparator="."
+          decimalSeparator=","
+          prefix="R$ "
+          decimalScale={2}
+          fixedDecimalScale={true}
+          allowNegative={false}
           required
         />
-        <CFormFeedback invalid>You must agree before submitting.</CFormFeedback>
+        <CFormFeedback invalid>Please provide a valid value.</CFormFeedback>
       </CCol>
-      <CCol xs={12}>
-        <CButton color="primary" type="submit">
-          Submit form
+
+      <CCol md={3}>
+        <CFormLabel htmlFor="validationCustom05">Parcelas</CFormLabel>
+        <CFormInput type="text" id="validationCustom05" required />
+        <CFormFeedback invalid>Please provide a valid zip.</CFormFeedback>
+      </CCol>
+
+      <CCol md={12}>
+        <CFormLabel htmlFor="validationCustom05">Descrição do Documento</CFormLabel>
+        <CFormInput type="text" id="validationCustom05" required />
+        <CFormFeedback invalid>Please provide a valid zip.</CFormFeedback>
+      </CCol>
+
+      <CCol md={12}>
+        <CFormLabel htmlFor="validationCustom05">Codigo de Barras do Documento</CFormLabel>
+        <CFormInput type="text" id="validationCustom05" required />
+        <CFormFeedback invalid>Please provide a valid zip.</CFormFeedback>
+      </CCol>
+
+      <CCol md={4}>
+        <CFormLabel htmlFor="validationCustom05">Competência</CFormLabel>
+        <CFormInput type="date" id="validationCustom05" required />
+        <CFormFeedback invalid>Please provide a valid zip.</CFormFeedback>
+      </CCol>
+      <CCol md={4}>
+        <CFormLabel htmlFor="validationCustom05">Emissão</CFormLabel>
+        <CFormInput type="date" id="validationCustom05" required />
+        <CFormFeedback invalid>Please provide a valid zip.</CFormFeedback>
+      </CCol>
+      <CCol md={4}>
+        <CFormLabel htmlFor="validationCustom05">Vencimento</CFormLabel>
+        <CFormInput type="date" id="validationCustom05" required />
+        <CFormFeedback invalid>Please provide a valid zip.</CFormFeedback>
+      </CCol>
+
+      <CCol xs={1}>
+        <CButton color="success" type="submit" style={{ marginBottom: '10px' }}>
+          Cadastrar
         </CButton>
       </CCol>
+      <CCol xs={1} >
+        <CButton color="danger" type="reset" style={{ marginBottom: '10px' }}>
+          Fechar
+        </CButton>
+      </CCol>
+
     </CForm>
   )
 }
@@ -158,6 +339,9 @@ const BrowserDefaults = () => {
         />
         <CFormFeedback invalid>You must agree before submitting.</CFormFeedback>
       </CCol>
+
+
+
       <CCol xs={12}>
         <CButton color="primary" type="submit">
           Submit form
