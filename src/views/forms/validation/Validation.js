@@ -48,18 +48,18 @@ export const CustomStyles = () => {
           type="button"
           color="secondary"
           variant="ghost"
-          id="inputGroupFileAddon03"          
+          id="inputGroupFileAddon03"
           style={{
             height: '36px',
             width: '80px',
-            marginTop: '32px',            
+            marginTop: '32px',
             marginLeft: '10px',
             marginLeft: '10px',
             padding: 0,
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            backgroundColor: '#3d99f5',                        
+            backgroundColor: '#3d99f5',
           }}
         >
           <CIcon icon={cilSearch} style={{
@@ -121,7 +121,41 @@ export const CustomStyles = () => {
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          backgroundColor: '#249542',            
+          backgroundColor: '#249542',
+        }}
+      >
+          <CIcon icon={cilSearch} size="lg" style={{
+          height: '30px',
+          width: '30px',
+            '--ci-primary-color': 'white',
+        }} />
+      </CButton>
+      </CCol>
+      <CCol md={5}>
+        <CFormLabel htmlFor="validationCustom01">Tipo de Conta</CFormLabel>
+        <CFormSelect id="validationCustom04">
+          <option disabled>Choose...</option>
+          <option>...</option>
+        </CFormSelect>
+        <CFormFeedback invalid>Please provide a valid city.</CFormFeedback>
+      </CCol>
+      <CCol md={1}>
+      <CButton
+        type="button"
+        color="secondary"
+        variant="ghost"
+        id="inputGroupFileAddon03"
+        style={{
+          height: '36px',
+          width: '80px',
+          marginTop: '32px',
+          marginLeft: '10px',
+          marginLeft: '10px',
+          padding: 0,
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          backgroundColor: '#249542',
         }}
       >
           <CIcon icon={cilSearch} size="lg" style={{
@@ -156,7 +190,7 @@ export const CustomStyles = () => {
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          backgroundColor: '#249542',              
+          backgroundColor: '#249542',
         }}
       >
         <CIcon icon={cilSearch} className="text-success" size="lg" style={{
@@ -191,7 +225,7 @@ export const CustomStyles = () => {
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          backgroundColor: '#249542',              
+          backgroundColor: '#249542',
         }}
       >
           <CIcon icon={cilSearch} className="text-success" size="lg" style={{
@@ -227,7 +261,7 @@ export const CustomStyles = () => {
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          backgroundColor: '#249542',              
+          backgroundColor: '#249542',
         }}
       >
           <CIcon icon={cilSearch} className="text-success" size="lg" style={{
@@ -239,7 +273,7 @@ export const CustomStyles = () => {
       </CCol>
 
       <CCol md={5}>
-        <CFormLabel htmlFor="validationCustomUsername">Conta</CFormLabel>
+        <CFormLabel htmlFor="validationCustomUsername">Centro de Custo</CFormLabel>
         <CFormSelect id="validationCustom04">
           <option disabled>Choose...</option>
           <option>...</option>

@@ -53,14 +53,19 @@ const _nav = [
   },
   {
     component: CNavGroup,
-    name: 'Contas a Pagar',
+    name: 'Financeiro',
     to: '/base',
     icon: <CIcon icon={cibAmazonPay} customClassName="nav-icon" />,
     items: [
       {
         component: CNavItem,
-        name: 'Accordion',
+        name: 'Contas a Pagar',
         to: '/base/accordion',
+      },
+      {
+        component: CNavItem,
+        name: 'Contas a Receber',
+        to: '/base/receber',
       },
       {
         component: CNavItem,
