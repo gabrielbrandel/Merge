@@ -43,60 +43,94 @@ export const CustomStyles = () => {
     >
       <CInputGroup className="mb-2">
 
+        <CCol md={1}>
         <CButton
           type="button"
           color="secondary"
           variant="ghost"
-          id="inputGroupFileAddon03"
+          id="inputGroupFileAddon03"          
           style={{
-            height: '35px',
-            width: '35px',
-            marginTop: '35px',
-            marginRight: '5px',
+            height: '36px',
+            width: '80px',
+            marginTop: '32px',            
             marginLeft: '10px',
             marginLeft: '10px',
             padding: 0,
             display: 'flex',
             justifyContent: 'center',
-            alignItems: 'center'
+            alignItems: 'center',
+            backgroundColor: '#3d99f5',                        
           }}
         >
-          <CIcon icon={cilSearch} className="text-info" size="lg" style={{
-            height: '35px',
-            width: '35px',
+          <CIcon icon={cilSearch} style={{
+            height: '30px',
+            width: '30px',
+              '--ci-primary-color': 'white',
           }} />
         </CButton>
+        </CCol>
 
-        <CCol md={11}>
+        <CCol md={10}>
           <CFormLabel htmlFor="validationCustom01">Fornecedor</CFormLabel>
           <CFormInput type="text" id="validationCustom01" defaultValue="Mark" required />
           <CFormFeedback valid>Looks good!</CFormFeedback>
         </CCol>
+
+        <CCol md={1}>
+          <CButton
+            type="button"
+            color="secondary"
+            variant="ghost"
+            id="inputGroupFileAddon03"
+            style={{
+              height: '36px',
+              width: '40px',
+              marginTop: '32px',
+              marginLeft: '10px',
+              marginLeft: '10px',
+              padding: 0,
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              backgroundColor: 'red',
+            }}
+          >
+            <CIcon icon={cilDelete} style={{
+              height: '30px',
+              width: '30px',
+              '--ci-primary-color': 'white',
+            }} />
+          </CButton>
+        </CCol>
+
       </CInputGroup>
 
+      <CCol md={1}>
       <CButton
         type="button"
         color="secondary"
         variant="ghost"
         id="inputGroupFileAddon03"
         style={{
-          height: '35px',
-          width: '35px',
-          marginTop: '48px',
-          marginRight: '5px',
+          height: '36px',
+          width: '80px',
+          marginTop: '32px',
           marginLeft: '10px',
           marginLeft: '10px',
           padding: 0,
           display: 'flex',
           justifyContent: 'center',
-          alignItems: 'center'
+          alignItems: 'center',
+          backgroundColor: '#249542',            
         }}
       >
-        <CIcon icon={cibAddthis} className="text-success" size="lg" style={{
-          height: '35px',
-          width: '35px',
+          <CIcon icon={cilSearch} size="lg" style={{
+          height: '30px',
+          width: '30px',
+            '--ci-primary-color': 'white',
         }} />
       </CButton>
+      </CCol>
       <CCol md={5}>
         <CFormLabel htmlFor="validationCustom01">Tipo de Conta</CFormLabel>
         <CFormSelect id="validationCustom04">
@@ -106,29 +140,33 @@ export const CustomStyles = () => {
         <CFormFeedback invalid>Please provide a valid city.</CFormFeedback>
       </CCol>
 
+      <CCol md={1}>
       <CButton
         type="button"
         color="secondary"
         variant="ghost"
         id="inputGroupFileAddon03"
         style={{
-          height: '35px',
-          width: '35px',
-          marginTop: '48px',
-          marginRight: '5px',
+          height: '36px',
+          width: '80px',
+          marginTop: '32px',
+          marginLeft: '10px',
           marginLeft: '10px',
           padding: 0,
           display: 'flex',
           justifyContent: 'center',
-          alignItems: 'center'
+          alignItems: 'center',
+          backgroundColor: '#249542',              
         }}
       >
-        <CIcon icon={cibAddthis} className="text-success" size="lg" style={{
-          height: '35px',
-          width: '35px',
+        <CIcon icon={cilSearch} className="text-success" size="lg" style={{
+          height: '30px',
+          width: '30px',
+            '--ci-primary-color': 'white',
         }} />
       </CButton>
-      <CCol md={6}>
+      </CCol>
+      <CCol md={5}>
         <CFormLabel htmlFor="validationCustom02">Grupo de Conta</CFormLabel>
         <CFormSelect id="validationCustom04">
           <option disabled>Choose...</option>
@@ -137,28 +175,33 @@ export const CustomStyles = () => {
         <CFormFeedback invalid>Please provide a valid city.</CFormFeedback>
       </CCol>
 
+      <CCol md={1}>
       <CButton
         type="button"
         color="secondary"
         variant="ghost"
         id="inputGroupFileAddon03"
         style={{
-          height: '35px',
-          width: '35px',
-          marginTop: '48px',
-          marginRight: '5px',
+          height: '36px',
+          width: '80px',
+          marginTop: '32px',
+          marginLeft: '10px',
           marginLeft: '10px',
           padding: 0,
           display: 'flex',
           justifyContent: 'center',
-          alignItems: 'center'
+          alignItems: 'center',
+          backgroundColor: '#249542',              
         }}
       >
-        <CIcon icon={cibAddthis} className="text-success" size="lg" style={{
-          height: '35px',
-          width: '35px',
+          <CIcon icon={cilSearch} className="text-success" size="lg" style={{
+          height: '30px',
+          width: '30px',
+            '--ci-primary-color': 'white',
         }} />
       </CButton>
+      </CCol>
+
       <CCol md={5}>
         <CFormLabel htmlFor="validationCustomUsername">SubGrupo de Conta</CFormLabel>
         <CFormSelect id="validationCustom04">
@@ -168,29 +211,34 @@ export const CustomStyles = () => {
         <CFormFeedback invalid>Please provide a valid city.</CFormFeedback>
       </CCol>
 
+      <CCol md={1}>
       <CButton
         type="button"
         color="secondary"
         variant="ghost"
         id="inputGroupFileAddon03"
         style={{
-          height: '35px',
-          width: '35px',
-          marginTop: '48px',
-          marginRight: '5px',
+          height: '36px',
+          width: '80px',
+          marginTop: '32px',
+          marginLeft: '10px',
           marginLeft: '10px',
           padding: 0,
           display: 'flex',
           justifyContent: 'center',
-          alignItems: 'center'
+          alignItems: 'center',
+          backgroundColor: '#249542',              
         }}
       >
-        <CIcon icon={cibAddthis} className="text-success" size="lg" style={{
-          height: '35px',
-          width: '35px',
+          <CIcon icon={cilSearch} className="text-success" size="lg" style={{
+          height: '30px',
+          width: '30px',
+            '--ci-primary-color': 'white',
         }} />
       </CButton>
-      <CCol md={6}>
+      </CCol>
+
+      <CCol md={5}>
         <CFormLabel htmlFor="validationCustomUsername">Conta</CFormLabel>
         <CFormSelect id="validationCustom04">
           <option disabled>Choose...</option>
