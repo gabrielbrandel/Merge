@@ -15,11 +15,14 @@ import {
   CFormLabel,
   CFormFeedback,
   CFormInput,
+  CInputGroup,
 } from '@coreui/react'
 import axiosInstance from '../../../api/AxiosInstance';
 import TextField from '@mui/material/TextField';
+import { CModal, CModalHeader, CModalBody, CModalFooter, CButton } from '@coreui/react';
 
-export const TableReceber = () => {
+
+export const TableReceber = ({ openModal }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [rows, setRows] = useState([]);
 
@@ -47,23 +50,32 @@ export const TableReceber = () => {
           <CCardHeader>
             <strong>Contas a Receber</strong>
           </CCardHeader>
-          <CCol md={12}>
-            <CFormLabel htmlFor="validationCustom01" style={{
-              marginLeft: '10px',
-              marginTop: '10px',
-              padding: 0,
-              display: 'flex',
-            }} >Pesquisar</CFormLabel>
-            <CFormInput type="text" id="validationCustom01" defaultValue="" style={{
-              height: '36px',
-              width: '97%',
-              marginLeft: '10px',
-              padding: 0,
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-            }} />
-          </CCol>
+
+          <CInputGroup className="mb-2">
+            <CCol md={12}>
+              <CFormLabel htmlFor="validationCustom01" style={{
+                marginLeft: '10px',
+                marginTop: '10px',
+                padding: 0,
+                display: 'flex',
+              }} >Pesquisar</CFormLabel>
+              <CFormInput type="text" id="validationCustom01" defaultValue="" style={{
+                height: '36px',
+                width: '97%',
+                marginLeft: '10px',
+                padding: 0,
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }} />
+            </CCol>
+            <CCol xs={4}>
+              <CButton color="success" type="submit" onClick={openModal} style={{ marginTop: '10px', marginLeft: '10px' }} >
+                Adicionar Contas a Receber
+              </CButton>
+            </CCol>
+          </CInputGroup>
+
           <CCardBody>
             <CTable>
               <CTableHead>

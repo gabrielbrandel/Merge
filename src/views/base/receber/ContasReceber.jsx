@@ -19,22 +19,7 @@ import { getInitialValues, getColumns } from './ColunasReceber';
 import CIcon from '@coreui/icons-react'
 import { cibAddthis, cilDelete, cilSearch } from '@coreui/icons'
 import { TableReceber } from '../tables/TableReceber';
-
-function EditToolbar({ setSelectedClient, setEdit, setCadastro }) {
-  const handleClick = () => {
-    setSelectedClient(null);
-    setEdit(false);
-    setCadastro(true);
-  };
-
-  return (
-    <GridToolbarContainer>
-      <Button color="primary" startIcon={<AddIcon />} onClick={handleClick}>
-        Adicionar Despesa
-      </Button>
-    </GridToolbarContainer>
-  );
-}
+import { CModal, CModalHeader, CModalBody, CModalFooter, CButton } from '@coreui/react';
 
 export default function ContasAReceber() {
   const [rows, setRows] = useState([]);
@@ -43,10 +28,36 @@ export default function ContasAReceber() {
   const [selectedClient, setSelectedClient] = useState(null);
   const [edit, setEdit] = useState(false);
   const [cadastro, setCadastro] = useState(false);
-  const today = new Date().toISOString().split('T')[0];
   const [searchTerm, setSearchTerm] = useState('');
   const theme = useTheme();
-  const isMobile = useMediaQuery('(max-width:600px)');
+  const [modalVisible, setModalVisible] = useState(false);
+
+  // const today = new Date().toISOString().split('T')[0];
+
+  const openModal = () => {
+    setModalVisible(true);
+  };
+
+  const closeModal = () => {
+    setModalVisible(false);
+  };
+
+  function EditToolbar({ setSelectedClient, setEdit, setCadastro }) {
+    const handleClick = () => {
+      setSelectedClient(null);
+      setEdit(false);
+      setCadastro(true);
+      openModal();
+    };
+
+    return (
+      <GridToolbarContainer>
+        <Button color="primary" startIcon={<AddIcon />} onClick={handleClick}>
+          Adicionar Despesa
+        </Button>
+      </GridToolbarContainer>
+    );
+  }
 
   useEffect(() => {
     const fetchClients = async () => {
@@ -161,77 +172,22 @@ export default function ContasAReceber() {
   };
 
   return (
-    <Box
-      sx={{
-        marginLeft: '5px', marginRight: '5px',
-        backgroundColor: theme.palette.background.paper.secondary,
-        color: theme.palette.text,
-      }}
-    >
-      {!(cadastro || edit) && (
-        <Box sx={{ mb: 2 }}>
-          {/* Input de Pesquisa */}
-          <TextField
-            label="Pesquisar"
-            variant="outlined"
-            value={searchTerm}
-            onChange={handleSearchChange}
-            sx={{
-              mb: 2,
-              marginRight: '2px',
-              ml: 0.5,
-              mr: 0.5,
-              width: 'calc(100% - 10px)',
-              // marginLeft: '5px',
-              // marginRight: '5px',
-              // Customizando a cor do rótulo, borda e texto
-              '& .MuiOutlinedInput-root': {
-                '& fieldset': {
-                  borderColor: 'white', // Cor da borda
-                },
-                '&:hover fieldset': {
-                  borderColor: 'white', // Cor da borda ao passar o mouse
-                },
-                '&.Mui-focused fieldset': {
-                  borderColor: 'white', // Cor da borda quando focado
-                },
-              },
-              '& .MuiInputLabel-root': {
-                color: 'white', // Cor do rótulo
-              },
-              '& .MuiInputBase-input': {
-                color: 'white', // Cor do texto digitado
-              },
-            }}
-            InputLabelProps={{
-              style: { color: 'white' }, // Cor do rótulo em modo focado
-            }}
-          />
-          <DataGrid
-            sx={{
-              marginLeft: '5px', marginRight: '5px',
-              // backgroundColor: theme.palette.background.paper.secondary,
-              color: 'white',
-            }}
-            rows={filteredRows}
-            columns={columns}
-            slots={{
-              toolbar: EditToolbar,
-            }}
-            slotProps={{
-              toolbar: { setSelectedClient, setEdit, setCadastro },
-            }}
-          />
-        </Box>
-      )}
-
+    <Box >
+      <TableReceber />
+      {console.log('modal:', modalVisible, closeModal )}
       {(cadastro || edit) && (
-        <Box>
-          <TelaReceber />
-          </Box>
+        <CModal visible={modalVisible} onClose={closeModal}>
+          <CModalHeader>Editar Despesa</CModalHeader>
+          <CModalBody>
+            <TelaReceber edit={edit} cadastro={cadastro} closeModal={closeModal} />
+          </CModalBody>
+          <CModalFooter>
+            <CButton color="secondary" onClick={closeModal}>
+              Fechar
+            </CButton>
+          </CModalFooter>
+        </CModal>
       )}
-
-      <TableReceber/>
     </Box>
   );
 }
