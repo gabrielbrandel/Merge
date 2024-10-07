@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
 import {
   CCard,
   CCardBody,
@@ -10,23 +10,33 @@ import {
   CAccordionHeader,
   CAccordionItem,
 } from '@coreui/react'
-import { DocsExample } from 'src/components'
-import ContasAPagar from '../pagar/ContasPagar.jsx'
+import { TelaPagar } from '../../../../src/views/forms/pagar/TelaPagar.js'
+import { TablePagar } from '../../../../src/views/base/tables/TablePagar.js'
+import { CModal, CModalHeader, CModalBody, CModalFooter, CButton } from '@coreui/react';
 
 const Accordion = () => {
+
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const openModal = () => {
+    setModalVisible(true);
+  };
+
+  const closeModal = () => {
+    setModalVisible(false);
+  };
+
   return (
     <CRow>
       <CCol xs={12}>
-        <CCard className="mb-4">
-          <CCardHeader>
-            <strong>Contas a Pagar</strong>
-          </CCardHeader>
-          <CCardBody>
-            {/* <DocsExample href="components/accordion">
-            </DocsExample> */}
-          </CCardBody>
-          <ContasAPagar/>
-        </CCard>
+        <CCardBody>
+        </CCardBody>
+        <TablePagar openModal={openModal} />
+        <CModal visible={modalVisible} onClose={closeModal} size="xl"  >
+          <CModalBody>
+            <TelaPagar closeModal={closeModal} />
+          </CModalBody>
+        </CModal>
       </CCol>
     </CRow>
   )

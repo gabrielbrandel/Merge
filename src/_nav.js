@@ -55,7 +55,7 @@ const _nav = [
     component: CNavGroup,
     name: 'Financeiro',
     to: '/base',
-    icon: <CIcon icon={cibAmazonPay} customClassName="nav-icon" />,
+    icon: <CIcon icon={cilCash} customClassName="nav-icon" />,
     items: [
       {
         component: CNavItem,
@@ -67,101 +67,101 @@ const _nav = [
         name: 'Contas a Receber',
         to: '/base/receber',
       },
-      {
-        component: CNavItem,
-        name: 'Breadcrumb',
-        to: '/base/breadcrumbs',
-      },
-      {
-        component: CNavItem,
-        name: 'Cards',
-        to: '/base/cards',
-      },
-      {
-        component: CNavItem,
-        name: 'Carousel',
-        to: '/base/carousels',
-      },
-      {
-        component: CNavItem,
-        name: 'Collapse',
-        to: '/base/collapses',
-      },
-      {
-        component: CNavItem,
-        name: 'List group',
-        to: '/base/list-groups',
-      },
-      {
-        component: CNavItem,
-        name: 'Navs & Tabs',
-        to: '/base/navs',
-      },
-      {
-        component: CNavItem,
-        name: 'Pagination',
-        to: '/base/paginations',
-      },
-      {
-        component: CNavItem,
-        name: 'Placeholders',
-        to: '/base/placeholders',
-      },
-      {
-        component: CNavItem,
-        name: 'Popovers',
-        to: '/base/popovers',
-      },
-      {
-        component: CNavItem,
-        name: 'Progress',
-        to: '/base/progress',
-      },
-      {
-        component: CNavItem,
-        name: 'Spinners',
-        to: '/base/spinners',
-      },
-      {
-        component: CNavItem,
-        name: 'Tables',
-        to: '/base/tables',
-      },
-      {
-        component: CNavItem,
-        name: 'Tabs',
-        to: '/base/tabs',
-      },
-      {
-        component: CNavItem,
-        name: 'Tooltips',
-        to: '/base/tooltips',
-      },
+      // {
+      //   component: CNavItem,
+      //   name: 'Breadcrumb',
+      //   to: '/base/breadcrumbs',
+      // },
+      // {
+      //   component: CNavItem,
+      //   name: 'Cards',
+      //   to: '/base/cards',
+      // },
+      // {
+      //   component: CNavItem,
+      //   name: 'Carousel',
+      //   to: '/base/carousels',
+      // },
+      // {
+      //   component: CNavItem,
+      //   name: 'Collapse',
+      //   to: '/base/collapses',
+      // },
+      // {
+      //   component: CNavItem,
+      //   name: 'List group',
+      //   to: '/base/list-groups',
+      // },
+      // {
+      //   component: CNavItem,
+      //   name: 'Navs & Tabs',
+      //   to: '/base/navs',
+      // },
+      // {
+      //   component: CNavItem,
+      //   name: 'Pagination',
+      //   to: '/base/paginations',
+      // },
+      // {
+      //   component: CNavItem,
+      //   name: 'Placeholders',
+      //   to: '/base/placeholders',
+      // },
+      // {
+      //   component: CNavItem,
+      //   name: 'Popovers',
+      //   to: '/base/popovers',
+      // },
+      // {
+      //   component: CNavItem,
+      //   name: 'Progress',
+      //   to: '/base/progress',
+      // },
+      // {
+      //   component: CNavItem,
+      //   name: 'Spinners',
+      //   to: '/base/spinners',
+      // },
+      // {
+      //   component: CNavItem,
+      //   name: 'Tables',
+      //   to: '/base/tables',
+      // },
+      // {
+      //   component: CNavItem,
+      //   name: 'Tabs',
+      //   to: '/base/tabs',
+      // },
+      // {
+      //   component: CNavItem,
+      //   name: 'Tooltips',
+      //   to: '/base/tooltips',
+      // },
     ],
   },
-  {
-    component: CNavGroup,
-    name: 'Contas a Receber',
-    to: '/buttons',
-    icon: <CIcon icon={cilCash} customClassName="nav-icon" />,
-    items: [
-      {
-        component: CNavItem,
-        name: 'Buttons',
-        to: '/buttons/buttons',
-      },
-      {
-        component: CNavItem,
-        name: 'Buttons groups',
-        to: '/buttons/button-groups',
-      },
-      {
-        component: CNavItem,
-        name: 'Dropdowns',
-        to: '/buttons/dropdowns',
-      },
-    ],
-  },
+  // {
+  //   component: CNavGroup,
+  //   name: 'Contas a Receber',
+  //   to: '/buttons',
+  //   icon: <CIcon icon={cilCash} customClassName="nav-icon" />,
+  //   items: [
+  //     {
+  //       component: CNavItem,
+  //       name: 'Buttons',
+  //       to: '/buttons/buttons',
+  //     },
+  //     {
+  //       component: CNavItem,
+  //       name: 'Buttons groups',
+  //       to: '/buttons/button-groups',
+  //     },
+  //     {
+  //       component: CNavItem,
+  //       name: 'Dropdowns',
+  //       to: '/buttons/dropdowns',
+  //     },
+  //   ],
+  // },
   {
     component: CNavGroup,
     name: 'Bancário',
@@ -242,42 +242,42 @@ const _nav = [
       },
     ],
   },
-  {
-    component: CNavGroup,
-    name: 'Icons',
-    icon: <CIcon icon={cilStar} customClassName="nav-icon" />,
-    items: [
-      {
-        component: CNavItem,
-        name: 'CoreUI Free',
-        to: '/icons/coreui-icons',
-        badge: {
-          color: 'success',
-          text: 'NEW',
-        },
-      },
-      {
-        component: CNavItem,
-        name: 'CoreUI Flags',
-        to: '/icons/flags',
-      },
-      {
-        component: CNavItem,
-        name: 'CoreUI Brands',
-        to: '/icons/brands',
-      },
-    ],
-  },
-  {
-    component: CNavItem,
-    name: 'Widgets',
-    to: '/widgets',
-    icon: <CIcon icon={cilCalculator} customClassName="nav-icon" />,
-    badge: {
-      color: 'info',
-      text: 'NEW',
-    },
-  },
+  // {
+  //   component: CNavGroup,
+  //   name: 'Icons',
+  //   icon: <CIcon icon={cilStar} customClassName="nav-icon" />,
+  //   items: [
+  //     {
+  //       component: CNavItem,
+  //       name: 'CoreUI Free',
+  //       to: '/icons/coreui-icons',
+  //       badge: {
+  //         color: 'success',
+  //         text: 'NEW',
+  //       },
+  //     },
+  //     {
+  //       component: CNavItem,
+  //       name: 'CoreUI Flags',
+  //       to: '/icons/flags',
+  //     },
+  //     {
+  //       component: CNavItem,
+  //       name: 'CoreUI Brands',
+  //       to: '/icons/brands',
+  //     },
+  //   ],
+  // },
+  // {
+  //   component: CNavItem,
+  //   name: 'Widgets',
+  //   to: '/widgets',
+  //   icon: <CIcon icon={cilCalculator} customClassName="nav-icon" />,
+  //   badge: {
+  //     color: 'info',
+  //     text: 'NEW',
+  //   },
+  // },
   {
     component: CNavTitle,
     name: 'Extras',
@@ -309,12 +309,12 @@ const _nav = [
       },
     ],
   },
-  {
-    component: CNavItem,
-    name: 'Docs',
-    href: 'https://coreui.io/react/docs/templates/installation/',
-    icon: <CIcon icon={cilDescription} customClassName="nav-icon" />,
-  },
+  // {
+  //   component: CNavItem,
+  //   name: 'Docs',
+  //   href: 'https://coreui.io/react/docs/templates/installation/',
+  //   icon: <CIcon icon={cilDescription} customClassName="nav-icon" />,
+  // },
 ]
 
 export default _nav

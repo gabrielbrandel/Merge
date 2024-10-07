@@ -12,7 +12,7 @@ import {
   CAccordionItem,
 } from '@coreui/react'
 import { TableReceber } from '../tables/TableReceber';
-import { TelaReceber } from '../../../views/forms/receber/Receber'
+import { TelaReceber } from '../../forms/receber/TelaReceber'
 import { CModal, CModalHeader, CModalBody, CModalFooter, CButton } from '@coreui/react';
 
 const ReceberMenu = () => {

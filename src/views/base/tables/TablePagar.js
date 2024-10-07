@@ -25,7 +25,7 @@ import CIcon from '@coreui/icons-react';
 import { cilPlus, cilTrash, cilPencil } from '@coreui/icons';
 
 
-export const TableReceber = ({ openModal }) => {
+export const TablePagar = ({ openModal }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [rows, setRows] = useState([]);
 
@@ -61,7 +61,7 @@ export const TableReceber = ({ openModal }) => {
       <CCol xs={12}>
         <CCard className="mb-4">
           <CCardHeader>
-            <strong>Contas a Receber</strong>
+            <strong>Contas a Pagar</strong>
           </CCardHeader>
 
           <CInputGroup className="mb-2">
