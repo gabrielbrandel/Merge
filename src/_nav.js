@@ -16,7 +16,7 @@ import {
   cilCash,
   cilGroup,
   cilInstitution,
-  cibAmazonPay,
+  cibMyspace,
 } from '@coreui/icons'
 import { CNavGroup, CNavItem, CNavTitle } from '@coreui/react'
 
@@ -60,7 +60,7 @@ const _nav = [
       {
         component: CNavItem,
         name: 'Contas a Pagar',
-        to: '/base/accordion',
+        to: '/base/pagar',
       },
       {
         component: CNavItem,
@@ -212,8 +212,14 @@ const _nav = [
   {
     component: CNavItem,
     name: 'Fornecedores',
-    to: '/charts',
+    to: '/base/fornecedores',
     icon: <CIcon icon={cilGroup} customClassName="nav-icon" />,
+  },
+  {
+    component: CNavItem,
+    name: 'Clientes',
+    to: '/base/clientes',
+    icon: <CIcon icon={cibMyspace} customClassName="nav-icon" />,
   },
   {
     component: CNavGroup,

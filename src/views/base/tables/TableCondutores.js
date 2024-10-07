@@ -23,7 +23,7 @@ import { CModal, CModalHeader, CModalBody, CModalFooter, CButton } from '@coreui
 import AddIcon from '@mui/icons-material/Add';
 import CIcon from '@coreui/icons-react';
 import { cilPlus, cilTrash, cilPencil } from '@coreui/icons';
-import PostAddIcon from '@mui/icons-material/PostAdd';
+
 
 export const TableReceber = ({ openModal }) => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -65,7 +65,7 @@ export const TableReceber = ({ openModal }) => {
           </CCardHeader>
 
           <CInputGroup className="mb-2">
-            <CCol md={8}>
+            <CCol md={12}>
               <CFormLabel htmlFor="validationCustom01" style={{
                 marginLeft: '10px',
                 marginTop: '10px',
@@ -87,9 +87,10 @@ export const TableReceber = ({ openModal }) => {
                 color="terciary"
                 type="submit"
                 onClick={openModal}
-                style={{ marginTop: '40px', marginLeft: '10px', backgroundColor: '#2E8B57', borderColor: '#2E8B57', color: 'white' }}
+                style={{ marginTop: '10px', marginLeft: '10px', backgroundColor: '#2E8B57', borderColor: '#2E8B57', color: 'white' }}
               >
-                <PostAddIcon /> 
+                <CIcon icon={cilPlus} style={{ marginRight: '5px' }} /> 
+                ADICIONAR CONTA
               </CButton>
 
             </CCol>

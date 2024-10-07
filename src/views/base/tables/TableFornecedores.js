@@ -23,9 +23,9 @@ import { CModal, CModalHeader, CModalBody, CModalFooter, CButton } from '@coreui
 import AddIcon from '@mui/icons-material/Add';
 import CIcon from '@coreui/icons-react';
 import { cilPlus, cilTrash, cilPencil } from '@coreui/icons';
-import PostAddIcon from '@mui/icons-material/PostAdd';
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
 
-export const TableReceber = ({ openModal }) => {
+export const TableFornecedores = ({ openModal }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [rows, setRows] = useState([]);
 
@@ -61,7 +61,7 @@ export const TableReceber = ({ openModal }) => {
       <CCol xs={12}>
         <CCard className="mb-4">
           <CCardHeader>
-            <strong>Contas a Receber</strong>
+            <strong>Cadastro de Fornecedores</strong>
           </CCardHeader>
 
           <CInputGroup className="mb-2">
@@ -89,7 +89,7 @@ export const TableReceber = ({ openModal }) => {
                 onClick={openModal}
                 style={{ marginTop: '40px', marginLeft: '10px', backgroundColor: '#2E8B57', borderColor: '#2E8B57', color: 'white' }}
               >
-                <PostAddIcon /> 
+                <PersonAddIcon/>
               </CButton>
 
             </CCol>
@@ -133,4 +133,3 @@ export const TableReceber = ({ openModal }) => {
   );
 };
 
-// export default TableReceber
