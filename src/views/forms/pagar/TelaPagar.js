@@ -23,6 +23,7 @@ import { DocsExample } from 'src/components'
 
 import CIcon from '@coreui/icons-react'
 import { cibAddthis, cilDelete, cilSearch } from '@coreui/icons'
+import ButtonCadastro from '../../buttons/button-groups/ButtonCadastro';
 
 export const TelaPagar = ({ closeModal }) => {
     const [validated, setValidated] = useState(false)
@@ -343,17 +344,7 @@ export const TelaPagar = ({ closeModal }) => {
                                 <CFormFeedback invalid>Please provide a valid zip.</CFormFeedback>
                             </CCol>
 
-                            <CCol xs={1}>
-                                <CButton color="success" type="submit" style={{ marginBottom: '10px', marginLeft: '10px', backgroundColor: '#2E8B57', borderColor: '#2E8B57', color: 'white' }}>
-                                    Cadastrar
-                                </CButton>
-                            </CCol>
-                            <CCol xs={1}>
-                                <CButton color="danger" type="reset" style={{ marginBottom: '10px', marginLeft: '20px', backgroundColor: '#da5b5a', borderColor: '#da5b5a', color: 'white' }} onClick={handleCancel}>
-                                    Fechar
-                                </CButton>
-                            </CCol>
-
+                            <ButtonCadastro handleCancel={handleCancel} />
 
                         </CForm>
                     </CCardBody>

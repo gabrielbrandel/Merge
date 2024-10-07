@@ -24,6 +24,7 @@ import AddIcon from '@mui/icons-material/Add';
 import CIcon from '@coreui/icons-react';
 import { cilPlus, cilTrash, cilPencil } from '@coreui/icons';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
+import ButtonTable from '../../../views/buttons/button-groups/ButtonTable'
 
 export const TableFornecedores = ({ openModal }) => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -94,7 +95,7 @@ export const TableFornecedores = ({ openModal }) => {
 
             </CCol>
           </CInputGroup>
-          
+
           <CCardBody>
             <CTable>
               <CTableHead>
@@ -109,13 +110,7 @@ export const TableFornecedores = ({ openModal }) => {
                 {rows.map((row) => (
                   <CTableRow key={row.id}>
                     <CTableDataCell style={{ padding: '1', textAlign: 'left', width: '90px' }}>
-                      <CButton style={{ backgroundColor: '#696969', borderColor: '#696969', color: 'white' }} size="sm" onClick={() => handleEdit(row.id)}>
-                        <CIcon icon={cilPencil} />
-                        </CButton>
-                      {' '}
-                      <CButton style={{ backgroundColor: '#da5b5a', borderColor: '#da5b5a', color: 'white' }} size="sm" onClick={() => handleDelete(row.id)}>
-                        <CIcon icon={cilTrash} />     
-                        </CButton>
+                      <ButtonTable row={row} handleEdit={handleEdit} handleDelete={handleDelete} />
                     </CTableDataCell>
                     <CTableDataCell>{row.id}</CTableDataCell>
                     <CTableDataCell>{row.name}</CTableDataCell>

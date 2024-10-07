@@ -22,6 +22,7 @@ import {
 
 import CIcon from '@coreui/icons-react'
 import { cilDelete, cilSearch, cilSpeech } from '@coreui/icons'
+import ButtonCadastro from '../../buttons/button-groups/ButtonCadastro';
 
 export const TelaClientes = ({ closeModal }) => {
 
@@ -105,7 +106,7 @@ export const TelaClientes = ({ closeModal }) => {
               </CCol>
 
               <CCol md={2}>
-                <CFormLabel htmlFor="validationCustom05">Cidade</CFormLabel>                
+                <CFormLabel htmlFor="validationCustom05">Cidade</CFormLabel>
                 <CFormInput type="text" id="validationCustom05" />
               </CCol>
 
@@ -113,12 +114,12 @@ export const TelaClientes = ({ closeModal }) => {
                 <CFormLabel htmlFor="validationCustom05">Complemento</CFormLabel>
                 <CFormInput type="text" id="validationCustom05" />
               </CCol>
-  
+
               <CCol md={4}>
                 <CFormLabel htmlFor="validationCustom05">E-mail</CFormLabel>
                 <CFormInput type="text" id="validationCustom05" />
               </CCol>
-  
+
 
               {/* <CCol xs={3} lg={4} xxl={2}>
         <CWidgetStatsC
@@ -137,17 +138,7 @@ export const TelaClientes = ({ closeModal }) => {
 
               {/* </CCol> */}
 
-              <CCol xs={1}>
-                <CButton color="success" type="submit" style={{ marginBottom: '10px', marginLeft: '10px', backgroundColor: '#2E8B57', borderColor: '#2E8B57', color: 'white' }}>
-                  Cadastrar
-                </CButton>
-              </CCol>
-              <CCol xs={1}>
-                <CButton color="danger" type="reset" style={{ marginBottom: '10px', marginLeft: '20px', backgroundColor: '#da5b5a', borderColor: '#da5b5a', color: 'white' }} onClick={handleCancel}>
-                  Fechar
-                </CButton>
-              </CCol>
-
+              <ButtonCadastro handleCancel={handleCancel} />
 
             </CForm>
           </CCardBody>

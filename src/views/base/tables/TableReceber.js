@@ -18,12 +18,10 @@ import {
   CInputGroup,
 } from '@coreui/react'
 import axiosInstance from '../../../api/AxiosInstance';
-import TextField from '@mui/material/TextField';
-import { CModal, CModalHeader, CModalBody, CModalFooter, CButton } from '@coreui/react';
-import AddIcon from '@mui/icons-material/Add';
-import CIcon from '@coreui/icons-react';
-import { cilPlus, cilTrash, cilPencil } from '@coreui/icons';
+
+import { CButton } from '@coreui/react';
 import PostAddIcon from '@mui/icons-material/PostAdd';
+import ButtonTable from '../../../views/buttons/button-groups/ButtonTable'
 
 export const TableReceber = ({ openModal }) => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -89,12 +87,12 @@ export const TableReceber = ({ openModal }) => {
                 onClick={openModal}
                 style={{ marginTop: '40px', marginLeft: '10px', backgroundColor: '#2E8B57', borderColor: '#2E8B57', color: 'white' }}
               >
-                <PostAddIcon /> 
+                <PostAddIcon />
               </CButton>
 
             </CCol>
           </CInputGroup>
-          
+
           <CCardBody>
             <CTable>
               <CTableHead>
@@ -109,13 +107,7 @@ export const TableReceber = ({ openModal }) => {
                 {rows.map((row) => (
                   <CTableRow key={row.id}>
                     <CTableDataCell style={{ padding: '1', textAlign: 'left', width: '90px' }}>
-                      <CButton style={{ backgroundColor: '#696969', borderColor: '#696969', color: 'white' }} size="sm" onClick={() => handleEdit(row.id)}>
-                        <CIcon icon={cilPencil} />
-                        </CButton>
-                      {' '}
-                      <CButton style={{ backgroundColor: '#da5b5a', borderColor: '#da5b5a', color: 'white' }} size="sm" onClick={() => handleDelete(row.id)}>
-                        <CIcon icon={cilTrash} />     
-                        </CButton>
+                      <ButtonTable row={row} handleEdit={handleEdit} handleDelete={handleDelete} />
                     </CTableDataCell>
                     <CTableDataCell>{row.id}</CTableDataCell>
                     <CTableDataCell>{row.name}</CTableDataCell>
