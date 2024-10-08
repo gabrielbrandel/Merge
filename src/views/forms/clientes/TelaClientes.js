@@ -78,9 +78,42 @@ export const TelaClientes = ({ closeModal }) => {
               validated={validated}
               onSubmit={handleSubmit}
             >
-              <CCol md={6}>
+              <CCol md={4}>
                 <CFormLabel htmlFor="validationCustom01">Nome</CFormLabel>
-                <CFormInput type="text" id="validationCustom01" defaultValue="" required />
+                <CInputGroup>
+                  <CFormInput
+                    type="text"
+                    id="validationCustom01"
+                    defaultValue=""
+                    required
+                  />
+                  <CButton
+                    type="button"
+                    color="secondary"
+                    variant="ghost"
+                    id="inputGroupFileAddon03"
+                    size="sm"
+                    style={{
+                      height: '40px',
+                      width: '40px',
+                      backgroundColor: 'red',
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <CIcon
+                      icon={cilDelete}
+                      style={{
+                        height: '20px',
+                        width: '20px',
+                        '--ci-primary-color': 'white',
+                      }}
+                    />
+                  </CButton>
+
+                  <CFormFeedback valid></CFormFeedback>
+                </CInputGroup>
               </CCol>
 
               <CCol md={4}>
@@ -90,13 +123,13 @@ export const TelaClientes = ({ closeModal }) => {
                     type="text"
                     id="validationCustom05"
                     value={value}
-                    onChange={handleMaskChange} 
+                    onChange={handleMaskChange}
                     required
                   />
                   <CButton
                     color="primary"
                     size="sm"
-                    onClick={handleValidateClick} 
+                    onClick={handleValidateClick}
                   >
                     Formatar
                   </CButton>
@@ -104,21 +137,15 @@ export const TelaClientes = ({ closeModal }) => {
                 <CFormFeedback invalid>{obrigatorio}</CFormFeedback>
               </CCol>
 
-
-              <CCol md={2}>
-                <CFormLabel htmlFor="validationCustom05">Pessoa</CFormLabel>
-                <CFormInput type="text" id="validationCustom05" required />
-                <CFormFeedback invalid>{obrigatorio}</CFormFeedback>
-              </CCol>
-
-              <CCol md={2}>
-                <CFormLabel htmlFor="validationCustom01">Telefone</CFormLabel>
-                <CFormInput type="text" id="validationCustom01" defaultValue="" />
-              </CCol>
-
-              <CCol md={2}>
-                <CFormLabel htmlFor="validationCustom01">CEP</CFormLabel>
-                <CFormInput type="text" id="validationCustom01" defaultValue="" />
+              <CCol md={4}>
+                <CFormLabel htmlFor="validationCustom05">E-mail</CFormLabel>
+                <CFormInput
+                  type="email"
+                  id="validationCustom05"
+                  placeholder="exemplo@dominio.com"
+                  required
+                />
+                <CFormFeedback invalid>Por favor, insira um e-mail válido.</CFormFeedback>
               </CCol>
 
               <CCol md={6}>
@@ -128,17 +155,105 @@ export const TelaClientes = ({ closeModal }) => {
 
               <CCol md={2}>
                 <CFormLabel htmlFor="validationCustom05">Número</CFormLabel>
-                <CFormInput type="text" id="validationCustom05" />
+                <CFormInput
+                  type="text"
+                  id="validationCustom05"
+                />
               </CCol>
 
-              <CCol md={2}>
+              <CCol md={4}>
                 <CFormLabel htmlFor="validationCustom05">Bairro</CFormLabel>
                 <CFormInput type="text" id="validationCustom05" />
               </CCol>
 
               <CCol md={2}>
+                <CFormLabel htmlFor="validationCustom05">Pessoa</CFormLabel>
+                <CFormInput type="text" id="validationCustom05" required />
+                <CFormFeedback invalid>{obrigatorio}</CFormFeedback>
+              </CCol>
+
+              <CCol md={2}>
+                <CFormLabel htmlFor="validationCustom05">Telefone</CFormLabel>
+                <CFormInput
+                  type="text"
+                  id="validationCustom05"
+                  placeholder="(44) 9 9999-9999"
+                />
+              </CCol>
+
+
+              <CCol md={2}>
+                <CFormLabel htmlFor="validationCustom05">CEP</CFormLabel>
+                <CInputGroup>
+                  <CButton
+                    type="button"
+                    color="secondary"
+                    variant="ghost"
+                    id="inputGroupFileAddon03"
+                    size="sm"
+                    style={{
+                      height: '40px',
+                      width: '40px',
+                      backgroundColor: '#3d99f5',
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <CIcon
+                      icon={cilSearch}
+                      style={{
+                        height: '20px',
+                        width: '20px',
+                        backgroundColor: '#3d99f5',
+                        '--ci-primary-color': 'white',
+                      }}
+                    />
+                  </CButton>
+                  <CFormInput
+                    type="text"
+                    id="validationCustom05"
+                    required
+                  />
+                </CInputGroup>
+                <CFormFeedback invalid>{obrigatorio}</CFormFeedback>
+              </CCol>
+
+              <CCol md={2}>
                 <CFormLabel htmlFor="validationCustom05">Cidade</CFormLabel>
-                <CFormInput type="text" id="validationCustom05" />
+                <CInputGroup>
+                  <CButton
+                    type="button"
+                    color="secondary"
+                    variant="ghost"
+                    id="inputGroupFileAddon03"
+                    size="sm"
+                    style={{
+                      height: '40px',
+                      width: '40px',
+                      backgroundColor: '#3d99f5',
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <CIcon
+                      icon={cilSearch}
+                      style={{
+                        height: '20px',
+                        width: '20px',
+                        backgroundColor: '#3d99f5',
+                        '--ci-primary-color': 'white',
+                      }}
+                    />
+                  </CButton>
+                  <CFormInput
+                    type="text"
+                    id="validationCustom05"
+                    required
+                  />
+                </CInputGroup>
+                <CFormFeedback invalid>{obrigatorio}</CFormFeedback>
               </CCol>
 
               <CCol md={8}>
@@ -147,17 +262,7 @@ export const TelaClientes = ({ closeModal }) => {
               </CCol>
 
               <CCol md={4}>
-                <CFormLabel htmlFor="validationCustom05">E-mail</CFormLabel>         
-                <CFormInput
-                  type="email"
-                  id="validationCustom05"
-                  placeholder="exemplo@dominio.com"
-                  required
-                />
-                <CFormFeedback invalid>Por favor, insira um e-mail válido.</CFormFeedback>
               </CCol>
-              <CCol md={8}>
-                </CCol>
 
 
               {/* <CCol xs={3} lg={4} xxl={2}>

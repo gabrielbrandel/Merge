@@ -94,6 +94,7 @@ export const TelaPagar = ({ closeModal }) => {
                                             color="secondary"
                                             variant="ghost"
                                             id="inputGroupFileAddon03"
+                                            size="sm"
                                             style={{
                                                 height: '40px',
                                                 width: '40px',

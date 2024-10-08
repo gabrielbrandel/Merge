@@ -87,7 +87,7 @@ export const TelaReceber = ({ closeModal }) => {
                     <CFormInput
                       type="text"
                       id="validationCustom01"
-                      defaultValue="Mark"
+                      defaultValue=""
                       required
                     />
                     <CButton
@@ -95,6 +95,7 @@ export const TelaReceber = ({ closeModal }) => {
                       color="secondary"
                       variant="ghost"
                       id="inputGroupFileAddon03"
+                      size="sm"
                       style={{
                         height: '40px',
                         width: '40px',
