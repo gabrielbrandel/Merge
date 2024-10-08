@@ -67,7 +67,7 @@ export const TelaPagar = ({ closeModal }) => {
                                             style={{
                                                 height: '40px',
                                                 width: '40px',
-                                                backgroundColor: '#249542',
+                                                backgroundColor: '#3d99f5',
                                                 display: 'flex',
                                                 justifyContent: 'center',
                                                 alignItems: 'center',
@@ -78,6 +78,7 @@ export const TelaPagar = ({ closeModal }) => {
                                                 style={{
                                                     height: '20px',
                                                     width: '20px',
+                                                    backgroundColor: '#3d99f5',
                                                     '--ci-primary-color': 'white',
                                                 }}
                                             />

@@ -11,6 +11,8 @@ const Receber = React.lazy(() => import('./views/base/receber/Receber.js'))
 const Pagar = React.lazy(() => import('./views/base/pagar/Pagar.js'))
 const Cliente = React.lazy(() => import('./views/base/clientes/Clientes.js'))
 const Fornecedor = React.lazy(() => import('./views/base/fornecedores/Fornecedores.js'))
+const Caminhoes = React.lazy(() => import('./views/base/caminhoes/Caminhoes.js'))
+const Motoristas = React.lazy(() => import('./views/base/motoristas/Motoristas.js'))
 
 const Breadcrumbs = React.lazy(() => import('./views/base/breadcrumbs/Breadcrumbs'))
 const Cards = React.lazy(() => import('./views/base/cards/Cards'))
@@ -70,6 +72,8 @@ const routes = [
   { path: '/base/receber', name: 'Receber', element: Receber },
   { path: '/base/clientes', name: 'Clientes', element: Cliente },
   { path: '/base/fornecedores', name: 'Fornecedores', element: Fornecedor },
+  { path: '/base/caminhoes', name: 'Caminhoes', element: Caminhoes },
+  { path: '/base/motoristas', name: 'Motoristas', element: Motoristas },
 
   { path: '/base/breadcrumbs', name: 'Breadcrumbs', element: Breadcrumbs },
   { path: '/base/cards', name: 'Cards', element: Cards },

@@ -167,46 +167,46 @@ const _nav = [
     name: 'Bancário',
     icon: <CIcon icon={cilInstitution} customClassName="nav-icon" />,
     items: [
-      {
-        component: CNavItem,
-        name: 'Form Control',
-        to: '/forms/form-control',
-      },
-      {
-        component: CNavItem,
-        name: 'Select',
-        to: '/forms/select',
-      },
-      {
-        component: CNavItem,
-        name: 'Checks & Radios',
-        to: '/forms/checks-radios',
-      },
-      {
-        component: CNavItem,
-        name: 'Range',
-        to: '/forms/range',
-      },
-      {
-        component: CNavItem,
-        name: 'Input Group',
-        to: '/forms/input-group',
-      },
-      {
-        component: CNavItem,
-        name: 'Floating Labels',
-        to: '/forms/floating-labels',
-      },
-      {
-        component: CNavItem,
-        name: 'Layout',
-        to: '/forms/layout',
-      },
-      {
-        component: CNavItem,
-        name: 'Validation',
-        to: '/forms/validation',
-      },
+      // {
+      //   component: CNavItem,
+      //   name: 'Form Control',
+      //   to: '/forms/form-control',
+      // },
+      // {
+      //   component: CNavItem,
+      //   name: 'Select',
+      //   to: '/forms/select',
+      // },
+      // {
+      //   component: CNavItem,
+      //   name: 'Checks & Radios',
+      //   to: '/forms/checks-radios',
+      // },
+      // {
+      //   component: CNavItem,
+      //   name: 'Range',
+      //   to: '/forms/range',
+      // },
+      // {
+      //   component: CNavItem,
+      //   name: 'Input Group',
+      //   to: '/forms/input-group',
+      // },
+      // {
+      //   component: CNavItem,
+      //   name: 'Floating Labels',
+      //   to: '/forms/floating-labels',
+      // },
+      // {
+      //   component: CNavItem,
+      //   name: 'Layout',
+      //   to: '/forms/layout',
+      // },
+      // {
+      //   component: CNavItem,
+      //   name: 'Validation',
+      //   to: '/forms/validation',
+      // },
     ],
   },
   {
@@ -223,29 +223,29 @@ const _nav = [
   },
   {
     component: CNavGroup,
-    name: 'Controle de Veículos',
+    name: 'Controle de Frota',
     icon: <CIcon icon={cilCarAlt} customClassName="nav-icon" />,
     items: [
       {
         component: CNavItem,
-        name: 'Veículos',
-        to: '/notifications/alerts',
+        name: 'Caminhões',
+        to: '/base/caminhoes',
       },
       {
         component: CNavItem,
-        name: 'Condutores',
-        to: '/notifications/badges',
+        name: 'Motoristas',
+        to: '/base/motoristas',
       },
-      {
-        component: CNavItem,
-        name: 'Modal',
-        to: '/notifications/modals',
-      },
-      {
-        component: CNavItem,
-        name: 'Toasts',
-        to: '/notifications/toasts',
-      },
+      // {
+      //   component: CNavItem,
+      //   name: 'Modal',
+      //   to: '/notifications/modals',
+      // },
+      // {
+      //   component: CNavItem,
+      //   name: 'Toasts',
+      //   to: '/notifications/toasts',
+      // },
     ],
   },
   // {
