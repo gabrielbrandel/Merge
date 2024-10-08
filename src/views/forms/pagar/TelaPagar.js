@@ -55,231 +55,206 @@ export const TelaPagar = ({ closeModal }) => {
                             validated={validated}
                             onSubmit={handleSubmit}
                         >
-                            <CInputGroup className="mb-2">
+                                <CCol md={12}>
+                                    <CFormLabel htmlFor="validationCustom01">Fornecedor</CFormLabel>
+                                    <CInputGroup>
+                                        <CButton
+                                            type="button"
+                                            color="secondary"
+                                            variant="ghost"
+                                            id="inputGroupFileAddon03"
+                                            size="sm"
+                                            style={{
+                                                height: '40px',
+                                                width: '40px',
+                                                backgroundColor: '#249542',
+                                                display: 'flex',
+                                                justifyContent: 'center',
+                                                alignItems: 'center',
+                                            }}
+                                        >
+                                            <CIcon
+                                                icon={cilSearch}
+                                                style={{
+                                                    height: '20px',
+                                                    width: '20px',
+                                                    '--ci-primary-color': 'white',
+                                                }}
+                                            />
+                                        </CButton>
+                                        <CFormInput
+                                            type="text"
+                                            id="validationCustom01"
+                                            defaultValue="Mark"                                            
+                                            required
+                                        />
+                                        <CButton
+                                            type="button"
+                                            color="secondary"
+                                            variant="ghost"
+                                            id="inputGroupFileAddon03"
+                                            style={{
+                                                height: '40px',
+                                                width: '40px',
+                                                backgroundColor: 'red',
+                                                display: 'flex',
+                                                justifyContent: 'center',
+                                                alignItems: 'center',
+                                            }}
+                                        >
+                                            <CIcon
+                                                icon={cilDelete}
+                                                style={{
+                                                    height: '20px',
+                                                    width: '20px',
+                                                    '--ci-primary-color': 'white',
+                                                }}
+                                            />
+                                        </CButton>
 
-                                <CCol md={1}>
+                                        <CFormFeedback valid></CFormFeedback>
+                                    </CInputGroup>
+                                </CCol>
+
+
+                            <CCol md={6}>
+                                <CFormLabel htmlFor="validationCustom01">Tipo de Conta</CFormLabel>
+                                <CInputGroup>
                                     <CButton
                                         type="button"
                                         color="secondary"
                                         variant="ghost"
                                         id="inputGroupFileAddon03"
                                         style={{
-                                            height: '36px',
-                                            width: '80px',
-                                            marginTop: '32px',
-                                            padding: 0,
+                                            height: '40px',
+                                            width: '40px',
                                             display: 'flex',
                                             justifyContent: 'center',
                                             alignItems: 'center',
                                             backgroundColor: '#249542',
                                         }}
                                     >
-                                        <CIcon icon={cilSearch} style={{
-                                            height: '30px',
-                                            width: '30px',
-                                            '--ci-primary-color': 'white',
-                                        }} />
+                                        <CIcon
+                                            icon={cilSearch}
+                                            size="lg"
+                                            style={{
+                                                height: '20px',
+                                                width: '20px',
+                                                '--ci-primary-color': 'white',
+                                            }}
+                                        />
                                     </CButton>
-                                </CCol>
+                                    <CFormSelect id="validationCustom04">
+                                        <option disabled>Choose...</option>
+                                        <option>...</option>
+                                    </CFormSelect>
+                                </CInputGroup>
+                                <CFormFeedback invalid>Please provide a valid option.</CFormFeedback>
+                            </CCol>
 
-                                <CCol md={10}>
-                                    <CFormLabel htmlFor="validationCustom01">Fornecedor</CFormLabel>
-                                    <CFormInput type="text" id="validationCustom01" defaultValue="Mark" required />
-                                    <CFormFeedback valid>Looks good!</CFormFeedback>
-                                </CCol>
-
-                                <CCol md={1}>
+                            <CCol md={6}>
+                                <CFormLabel htmlFor="validationCustom02">Grupo de Conta</CFormLabel>
+                                <CInputGroup>
                                     <CButton
                                         type="button"
                                         color="secondary"
                                         variant="ghost"
                                         id="inputGroupFileAddon03"
                                         style={{
-                                            height: '36px',
+                                            height: '40px',
                                             width: '40px',
-                                            marginTop: '32px',
-                                            marginLeft: '10px',
-                                            padding: 0,
                                             display: 'flex',
                                             justifyContent: 'center',
                                             alignItems: 'center',
-                                            backgroundColor: 'red',
+                                            backgroundColor: '#249542',
                                         }}
                                     >
-                                        <CIcon icon={cilDelete} style={{
-                                            height: '30px',
-                                            width: '30px',
-                                            '--ci-primary-color': 'white',
-                                        }} />
+                                        <CIcon
+                                            icon={cilSearch}
+                                            size="lg"
+                                            style={{
+                                                height: '20px',
+                                                width: '20px',
+                                                '--ci-primary-color': 'white',
+                                            }}
+                                        />
                                     </CButton>
-                                </CCol>
-
-                            </CInputGroup>
-
-                            <CCol md={1}>
-                                <CButton
-                                    type="button"
-                                    color="secondary"
-                                    variant="ghost"
-                                    id="inputGroupFileAddon03"
-                                    style={{
-                                        height: '36px',
-                                        width: '80px',
-                                        marginTop: '32px',
-                                        padding: 0,
-                                        display: 'flex',
-                                        justifyContent: 'center',
-                                        alignItems: 'center',
-                                        backgroundColor: '#249542',
-                                    }}
-                                >
-                                    <CIcon icon={cilSearch} size="lg" style={{
-                                        height: '30px',
-                                        width: '30px',
-                                        '--ci-primary-color': 'white',
-                                    }} />
-                                </CButton>
-                            </CCol>
-                            <CCol md={5}>
-                                <CFormLabel htmlFor="validationCustom01">Tipo de Conta</CFormLabel>
-                                <CFormSelect id="validationCustom04">
-                                    <option disabled>Choose...</option>
-                                    <option>...</option>
-                                </CFormSelect>
-                                <CFormFeedback invalid>Please provide a valid city.</CFormFeedback>
-                            </CCol>
-                            <CCol md={1}>
-                                <CButton
-                                    type="button"
-                                    color="secondary"
-                                    variant="ghost"
-                                    id="inputGroupFileAddon03"
-                                    style={{
-                                        height: '36px',
-                                        width: '80px',
-                                        marginTop: '32px',
-                                        padding: 0,
-                                        display: 'flex',
-                                        justifyContent: 'center',
-                                        alignItems: 'center',
-                                        backgroundColor: '#249542',
-                                    }}
-                                >
-                                    <CIcon icon={cilSearch} size="lg" style={{
-                                        height: '30px',
-                                        width: '30px',
-                                        '--ci-primary-color': 'white',
-                                    }} />
-                                </CButton>
-                            </CCol>
-                            <CCol md={5}>
-                                <CFormLabel htmlFor="validationCustom01">Tipo de Conta</CFormLabel>
-                                <CFormSelect id="validationCustom04">
-                                    <option disabled>Choose...</option>
-                                    <option>...</option>
-                                </CFormSelect>
-                                <CFormFeedback invalid>Please provide a valid city.</CFormFeedback>
+                                    <CFormSelect id="validationCustom04">
+                                        <option disabled>Choose...</option>
+                                        <option>...</option>
+                                    </CFormSelect>
+                                </CInputGroup>
+                                <CFormFeedback invalid>Please provide a valid option.</CFormFeedback>
                             </CCol>
 
-                            <CCol md={1}>
-                                <CButton
-                                    type="button"
-                                    color="secondary"
-                                    variant="ghost"
-                                    id="inputGroupFileAddon03"
-                                    style={{
-                                        height: '36px',
-                                        width: '80px',
-                                        marginTop: '32px',
-                                        padding: 0,
-                                        display: 'flex',
-                                        justifyContent: 'center',
-                                        alignItems: 'center',
-                                        backgroundColor: '#249542',
-                                    }}
-                                >
-                                    <CIcon icon={cilSearch} className="text-success" size="lg" style={{
-                                        height: '30px',
-                                        width: '30px',
-                                        '--ci-primary-color': 'white',
-                                    }} />
-                                </CButton>
-                            </CCol>
-                            <CCol md={5}>
-                                <CFormLabel htmlFor="validationCustom02">Grupo de Conta</CFormLabel>
-                                <CFormSelect id="validationCustom04">
-                                    <option disabled>Choose...</option>
-                                    <option>...</option>
-                                </CFormSelect>
-                                <CFormFeedback invalid>Please provide a valid city.</CFormFeedback>
-                            </CCol>
-
-                            <CCol md={1}>
-                                <CButton
-                                    type="button"
-                                    color="secondary"
-                                    variant="ghost"
-                                    id="inputGroupFileAddon03"
-                                    style={{
-                                        height: '36px',
-                                        width: '80px',
-                                        marginTop: '32px',
-                                        padding: 0,
-                                        display: 'flex',
-                                        justifyContent: 'center',
-                                        alignItems: 'center',
-                                        backgroundColor: '#249542',
-                                    }}
-                                >
-                                    <CIcon icon={cilSearch} className="text-success" size="lg" style={{
-                                        height: '30px',
-                                        width: '30px',
-                                        '--ci-primary-color': 'white',
-                                    }} />
-                                </CButton>
-                            </CCol>
-
-                            <CCol md={5}>
+                            <CCol md={6}>
                                 <CFormLabel htmlFor="validationCustomUsername">SubGrupo de Conta</CFormLabel>
-                                <CFormSelect id="validationCustom04">
-                                    <option disabled>Choose...</option>
-                                    <option>...</option>
-                                </CFormSelect>
-                                <CFormFeedback invalid>Please provide a valid city.</CFormFeedback>
+                                <CInputGroup>
+                                    <CButton
+                                        type="button"
+                                        color="secondary"
+                                        variant="ghost"
+                                        id="inputGroupFileAddon03"
+                                        style={{
+                                            height: '40px',
+                                            width: '40px',
+                                            display: 'flex',
+                                            justifyContent: 'center',
+                                            alignItems: 'center',
+                                            backgroundColor: '#249542',
+                                        }}
+                                    >
+                                        <CIcon
+                                            icon={cilSearch}
+                                            size="lg"
+                                            style={{
+                                                height: '20px',
+                                                width: '20px',
+                                                '--ci-primary-color': 'white',
+                                            }}
+                                        />
+                                    </CButton>
+                                    <CFormSelect id="validationCustom04">
+                                        <option disabled>Choose...</option>
+                                        <option>...</option>
+                                    </CFormSelect>
+                                </CInputGroup>
+                                <CFormFeedback invalid>Please provide a valid option.</CFormFeedback>
                             </CCol>
 
-                            <CCol md={1}>
-                                <CButton
-                                    type="button"
-                                    color="secondary"
-                                    variant="ghost"
-                                    id="inputGroupFileAddon03"
-                                    style={{
-                                        height: '36px',
-                                        width: '80px',
-                                        marginTop: '32px',
-                                        padding: 0,
-                                        display: 'flex',
-                                        justifyContent: 'center',
-                                        alignItems: 'center',
-                                        backgroundColor: '#249542',
-                                    }}
-                                >
-                                    <CIcon icon={cilSearch} className="text-success" size="lg" style={{
-                                        height: '30px',
-                                        width: '30px',
-                                        '--ci-primary-color': 'white',
-                                    }} />
-                                </CButton>
-                            </CCol>
-
-                            <CCol md={5}>
+                            <CCol md={6}>
                                 <CFormLabel htmlFor="validationCustomUsername">Centro de Custo</CFormLabel>
-                                <CFormSelect id="validationCustom04">
-                                    <option disabled>Choose...</option>
-                                    <option>...</option>
-                                </CFormSelect>
-                                <CFormFeedback invalid>Please provide a valid city.</CFormFeedback>
+                                <CInputGroup>
+                                    <CButton
+                                        type="button"
+                                        color="secondary"
+                                        variant="ghost"
+                                        id="inputGroupFileAddon03"
+                                        style={{
+                                            height: '40px',
+                                            width: '40px',
+                                            display: 'flex',
+                                            justifyContent: 'center',
+                                            alignItems: 'center',
+                                            backgroundColor: '#249542',
+                                        }}
+                                    >
+                                        <CIcon
+                                            icon={cilSearch}
+                                            size="lg"
+                                            style={{
+                                                height: '20px',
+                                                width: '20px',
+                                                '--ci-primary-color': 'white',
+                                            }}
+                                        />
+                                    </CButton>
+                                    <CFormSelect id="validationCustom04">
+                                        <option disabled>Choose...</option>
+                                        <option>...</option>
+                                    </CFormSelect>
+                                </CInputGroup>
+                                <CFormFeedback invalid>Please provide a valid option.</CFormFeedback>
                             </CCol>
 
                             <CCol md={3}>

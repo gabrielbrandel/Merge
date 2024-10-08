@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import InputMask from 'react-input-mask';
 
 import { NumericFormat } from 'react-number-format';
 import {
@@ -28,6 +29,8 @@ export const TelaClientes = ({ closeModal }) => {
 
   const [validated, setValidated] = useState(false)
   const obrigatorio = 'Esse campo é obrigatório.';
+  const [isCNPJ, setIsCNPJ] = useState(false);
+  const [value, setValue] = useState('');
 
   const handleSubmit = (event) => {
     const form = event.currentTarget
@@ -40,6 +43,24 @@ export const TelaClientes = ({ closeModal }) => {
 
   const handleCancel = () => {
     closeModal();
+  };
+
+  const handleMaskChange = (e) => {
+    const valueWithoutMask = e.target.value.replace(/\D/g, '');
+    setValue(valueWithoutMask);
+
+    if (valueWithoutMask.length > 11) {
+      setIsCNPJ(true);
+    } else {
+      setIsCNPJ(false);
+    }
+  };
+
+  const handleValidateClick = () => {
+    const formattedValue = isCNPJ
+      ? value.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, '$1.$2.$3/$4-$5')
+      : value.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
+    setValue(formattedValue);
   };
 
   return (
@@ -62,13 +83,29 @@ export const TelaClientes = ({ closeModal }) => {
                 <CFormInput type="text" id="validationCustom01" defaultValue="" required />
               </CCol>
 
-              <CCol md={3}>
+              <CCol md={4}>
                 <CFormLabel htmlFor="validationCustom05">CPF/CNPJ</CFormLabel>
-                <CFormInput type="text" id="validationCustom05" required />
+                <CInputGroup>
+                  <CFormInput
+                    type="text"
+                    id="validationCustom05"
+                    value={value}
+                    onChange={handleMaskChange} 
+                    required
+                  />
+                  <CButton
+                    color="primary"
+                    size="sm"
+                    onClick={handleValidateClick} 
+                  >
+                    Formatar
+                  </CButton>
+                </CInputGroup>
                 <CFormFeedback invalid>{obrigatorio}</CFormFeedback>
               </CCol>
 
-              <CCol md={1}>
+
+              <CCol md={2}>
                 <CFormLabel htmlFor="validationCustom05">Pessoa</CFormLabel>
                 <CFormInput type="text" id="validationCustom05" required />
                 <CFormFeedback invalid>{obrigatorio}</CFormFeedback>
@@ -84,23 +121,17 @@ export const TelaClientes = ({ closeModal }) => {
                 <CFormInput type="text" id="validationCustom01" defaultValue="" />
               </CCol>
 
-              {/* <CCol md={12}>
-                <CFormLabel className="h5" style={{ fontWeight: 'bold', marginTop: '10px' }}>
-                  Endereço
-                </CFormLabel>
-              </CCol> */}
-
               <CCol md={6}>
                 <CFormLabel htmlFor="validationCustom05">Rua</CFormLabel>
                 <CFormInput type="text" id="validationCustom05" />
               </CCol>
 
-              <CCol md={1}>
+              <CCol md={2}>
                 <CFormLabel htmlFor="validationCustom05">Número</CFormLabel>
                 <CFormInput type="text" id="validationCustom05" />
               </CCol>
 
-              <CCol md={3}>
+              <CCol md={2}>
                 <CFormLabel htmlFor="validationCustom05">Bairro</CFormLabel>
                 <CFormInput type="text" id="validationCustom05" />
               </CCol>
@@ -110,15 +141,23 @@ export const TelaClientes = ({ closeModal }) => {
                 <CFormInput type="text" id="validationCustom05" />
               </CCol>
 
-              <CCol md={6}>
+              <CCol md={8}>
                 <CFormLabel htmlFor="validationCustom05">Complemento</CFormLabel>
                 <CFormInput type="text" id="validationCustom05" />
               </CCol>
 
               <CCol md={4}>
-                <CFormLabel htmlFor="validationCustom05">E-mail</CFormLabel>
-                <CFormInput type="text" id="validationCustom05" />
+                <CFormLabel htmlFor="validationCustom05">E-mail</CFormLabel>         
+                <CFormInput
+                  type="email"
+                  id="validationCustom05"
+                  placeholder="exemplo@dominio.com"
+                  required
+                />
+                <CFormFeedback invalid>Por favor, insira um e-mail válido.</CFormFeedback>
               </CCol>
+              <CCol md={8}>
+                </CCol>
 
 
               {/* <CCol xs={3} lg={4} xxl={2}>

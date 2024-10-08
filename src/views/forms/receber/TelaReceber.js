@@ -57,97 +57,100 @@ export const TelaReceber = ({ closeModal }) => {
               validated={validated}
               onSubmit={handleSubmit}
             >
-              <CInputGroup className="mb-2">
-
-                <CCol md={1}>
-                  <CButton
-                    type="button"
-                    color="secondary"
-                    variant="ghost"
-                    id="inputGroupFileAddon03"
-                    style={{
-                      height: '36px',
-                      width: '80px',
-                      marginTop: '32px',
-                      padding: 0,
-                      display: 'flex',
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                      backgroundColor: '#3d99f5',
-                    }}
-                  >
-                    <CIcon icon={cilSearch} style={{
-                      height: '30px',
-                      width: '30px',
-                      '--ci-primary-color': 'white',
-                    }} />
-                  </CButton>
-                </CCol>
-
-                <CCol md={10}>
+                <CCol md={12}>
                   <CFormLabel htmlFor="validationCustom01">Cliente/Fornecedor</CFormLabel>
-                  <CFormInput type="text" id="validationCustom01" defaultValue="Mark" required />
+                  <CInputGroup>
+                    <CButton
+                      type="button"
+                      color="secondary"
+                      variant="ghost"
+                      id="inputGroupFileAddon03"
+                      style={{
+                        height: '40px',
+                        width: '40px',
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        backgroundColor: '#3d99f5',
+                      }}
+                    >
+                      <CIcon
+                        icon={cilSearch}
+                        style={{
+                          height: '20px',
+                          width: '20px',
+                          backgroundColor: '#3d99f5',
+                          '--ci-primary-color': 'white',
+                        }}
+                      />
+                    </CButton>
+                    <CFormInput
+                      type="text"
+                      id="validationCustom01"
+                      defaultValue="Mark"
+                      required
+                    />
+                    <CButton
+                      type="button"
+                      color="secondary"
+                      variant="ghost"
+                      id="inputGroupFileAddon03"
+                      style={{
+                        height: '40px',
+                        width: '40px',
+                        backgroundColor: 'red',
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                      }}
+                    >
+                      <CIcon
+                        icon={cilDelete}
+                        style={{
+                          height: '20px',
+                          width: '20px',
+                          '--ci-primary-color': 'white',
+                        }}
+                      />
+                    </CButton>
+
+                    <CFormFeedback valid></CFormFeedback>
+                  </CInputGroup>
                 </CCol>
 
-                <CCol md={1}>
+              <CCol md={6}>
+                <CFormLabel htmlFor="validationCustomUsername">Forma de Pagamento</CFormLabel>
+                <CInputGroup>
                   <CButton
                     type="button"
                     color="secondary"
                     variant="ghost"
                     id="inputGroupFileAddon03"
                     style={{
-                      height: '36px',
+                      height: '40px',
                       width: '40px',
-                      marginTop: '32px',
-                      marginLeft: '15px',
-                      padding: 0,
                       display: 'flex',
                       justifyContent: 'center',
                       alignItems: 'center',
-                      backgroundColor: 'red',
+                      backgroundColor: '#249542',
                     }}
                   >
-                    <CIcon icon={cilDelete} style={{
-                      height: '30px',
-                      width: '30px',
-                      '--ci-primary-color': 'white',
-                    }} />
+                    <CIcon
+                      icon={cilSearch}
+                      size="lg"
+                      style={{
+                        height: '20px',
+                        width: '20px',
+                        '--ci-primary-color': 'white',
+                      }}
+                    />
                   </CButton>
-                </CCol>
-
-              </CInputGroup>
-
-              <CCol md={1}>
-                <CButton
-                  type="button"
-                  color="secondary"
-                  variant="ghost"
-                  id="inputGroupFileAddon03"
-                  style={{
-                    height: '36px',
-                    width: '80px',
-                    marginTop: '32px',
-                    padding: 0,
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    backgroundColor: '#249542',
-                  }}
-                >
-                  <CIcon icon={cilSearch} size="lg" style={{
-                    height: '30px',
-                    width: '30px',
-                    '--ci-primary-color': 'white',
-                  }} />
-                </CButton>
-              </CCol>
-              <CCol md={7}>
-                <CFormLabel htmlFor="validationCustom01">Forma Pagamento</CFormLabel>
-                <CFormSelect id="validationCustom04">
-                  <option disabled>Choose...</option>
-                  <option>...</option>
-                </CFormSelect>
-                <CFormFeedback invalid>{obrigatorio}</CFormFeedback>
+                  <CFormSelect id="validationCustom04">
+                    <option disabled>Choose...</option>
+                    <option>...</option>
+                  </CFormSelect>
+                </CInputGroup>
+                <CFormFeedback invalid>Please provide a valid option.</CFormFeedback>
               </CCol>
 
               <CCol md={2}>
@@ -194,7 +197,7 @@ export const TelaReceber = ({ closeModal }) => {
                 <CFormFeedback invalid>{obrigatorio}</CFormFeedback>
               </CCol>
 
-              <CCol md={4}>
+              <CCol md={6}>
                 <CFormLabel htmlFor="validationCustom05">Observação</CFormLabel>
                 <CFormInput type="text" id="validationCustom05" />
               </CCol>

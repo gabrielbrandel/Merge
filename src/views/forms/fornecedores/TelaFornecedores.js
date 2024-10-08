@@ -122,7 +122,13 @@ export const TelaFornecedores= ({ closeModal }) => {
 
               <CCol md={8}>
                 <CFormLabel htmlFor="validationCustom05">E-mail</CFormLabel>
-                <CFormInput type="text" id="validationCustom05" />
+                <CFormInput
+                  type="email"
+                  id="validationCustom05"
+                  placeholder="exemplo@dominio.com"
+                  required
+                />
+                <CFormFeedback invalid>Por favor, insira um e-mail válido.</CFormFeedback>
               </CCol>
 
 

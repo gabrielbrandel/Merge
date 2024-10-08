@@ -25,6 +25,7 @@ import CIcon from '@coreui/icons-react';
 import { cilPlus, cilTrash, cilPencil } from '@coreui/icons';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import ButtonTable from '../../../views/buttons/button-groups/ButtonTable'
+import ButtonPesquisa from '../../../views/buttons/button-groups/ButtonPesquisa'
 
 export const TableFornecedores = ({ openModal }) => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -65,36 +66,7 @@ export const TableFornecedores = ({ openModal }) => {
             <strong>Cadastro de Fornecedores</strong>
           </CCardHeader>
 
-          <CInputGroup className="mb-2">
-            <CCol md={8}>
-              <CFormLabel htmlFor="validationCustom01" style={{
-                marginLeft: '10px',
-                marginTop: '10px',
-                padding: 0,
-                display: 'flex',
-              }} >Pesquisar</CFormLabel>
-              <CFormInput type="text" id="validationCustom01" defaultValue="" style={{
-                height: '36px',
-                width: '97%',
-                marginLeft: '10px',
-                padding: 0,
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }} />
-            </CCol>
-            <CCol xs={4}>
-              <CButton
-                color="terciary"
-                type="submit"
-                onClick={openModal}
-                style={{ marginTop: '40px', marginLeft: '10px', backgroundColor: '#2E8B57', borderColor: '#2E8B57', color: 'white' }}
-              >
-                <PersonAddIcon/>
-              </CButton>
-
-            </CCol>
-          </CInputGroup>
+          <ButtonPesquisa openModal={openModal} />
 
           <CCardBody>
             <CTable>
