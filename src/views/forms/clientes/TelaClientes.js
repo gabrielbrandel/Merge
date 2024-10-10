@@ -24,6 +24,9 @@ import {
 import CIcon from '@coreui/icons-react'
 import { cilDelete, cilSearch, cilSpeech } from '@coreui/icons'
 import ButtonCadastro from '../../buttons/button-groups/ButtonCadastro';
+import { useGesture } from '@use-gesture/react';
+
+// npm install @use-gesture / react
 
 export const TelaClientes = ({ closeModal }) => {
 
@@ -31,6 +34,27 @@ export const TelaClientes = ({ closeModal }) => {
   const obrigatorio = 'Esse campo é obrigatório.';
   const [isCNPJ, setIsCNPJ] = useState(false);
   const [value, setValue] = useState('');
+  const [timer, setTimer] = useState(null);
+  const [isPressed, setIsPressed] = useState(false);
+
+  const bind = useGesture({
+    onPointerDown: (state) => {
+      setIsPressed(true);
+      const newTimer = setTimeout(() => {
+        console.log('Pressionado por 3000ms!');
+        setIsPressed(false);
+        setTimer(null);
+      }, 3000);
+      setTimer(newTimer);
+    },
+    onPointerUp: () => {
+      if (timer) {
+        clearTimeout(timer);
+        setTimer(null);
+      }
+      setIsPressed(false);
+    }
+  });
 
   const handleSubmit = (event) => {
     const form = event.currentTarget
@@ -88,18 +112,22 @@ export const TelaClientes = ({ closeModal }) => {
                     required
                   />
                   <CButton
+                    {...bind()}
                     type="button"
                     color="secondary"
                     variant="ghost"
                     id="inputGroupFileAddon03"
                     size="sm"
+                    onContextMenu={(e) => e.preventDefault()} // Previne o menu de contexto
                     style={{
                       height: '40px',
                       width: '40px',
-                      backgroundColor: 'red',
+                      backgroundColor: isPressed ? 'darkred' : 'red',
                       display: 'flex',
                       justifyContent: 'center',
                       alignItems: 'center',
+                      transform: isPressed ? 'scale(0.95)' : 'scale(1)',
+                      transition: 'transform 0.1s ease',
                     }}
                   >
                     <CIcon
