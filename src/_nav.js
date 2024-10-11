@@ -19,6 +19,7 @@ import {
   cibMyspace,
 } from '@coreui/icons'
 import { CNavGroup, CNavItem, CNavTitle } from '@coreui/react'
+import MergeIcon from '@mui/icons-material/Merge';
 
 const _nav = [
   {
@@ -214,6 +215,12 @@ const _nav = [
     name: 'Fornecedores',
     to: '/base/fornecedores',
     icon: <CIcon icon={cilGroup} customClassName="nav-icon" />,
+  },
+  {
+    component: CNavItem,
+    name: 'Merge',
+    to: '/base/merge',
+    icon: <MergeIcon customClassName="nav-icon" />,
   },
   {
     component: CNavItem,
