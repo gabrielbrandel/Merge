@@ -5,7 +5,7 @@ import {
 } from '@coreui/react'
 import PostAddIcon from '@mui/icons-material/PostAdd';
 
-const ButtonPesquisa = ({ openModal }) => {
+const ButtonPesquisa = ({ openModal, value, onChange }) => {
     return (
         <>
             <CInputGroup className="mb-2">
@@ -13,6 +13,8 @@ const ButtonPesquisa = ({ openModal }) => {
                     type="text"
                     id="validationCustom01"
                     placeholder=" Pesquisar"
+                    value={value}
+                    onChange={onChange}
                     style={{
                         height: '36px',
                         padding: 0,

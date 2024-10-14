@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
 import {
   CCard,
   CCardBody,
@@ -16,25 +16,25 @@ import {
   CFormFeedback,
   CFormInput,
   CInputGroup,
-} from '@coreui/react'
+  CPagination,
+  CPaginationItem
+} from '@coreui/react';
 import axiosInstance from '../../../api/AxiosInstance';
-import TextField from '@mui/material/TextField';
-import { CModal, CModalHeader, CModalBody, CModalFooter, CButton } from '@coreui/react';
-import AddIcon from '@mui/icons-material/Add';
-import CIcon from '@coreui/icons-react';
-import { cilPlus, cilTrash, cilPencil } from '@coreui/icons';
-import PersonAddIcon from '@mui/icons-material/PersonAdd';
-import ButtonTable from '../../../views/buttons/button-groups/ButtonTable'
-import ButtonPesquisa from '../../../views/buttons/button-groups/ButtonPesquisa'
+import ButtonTable from '../../../views/buttons/button-groups/ButtonTable';
+import ButtonPesquisa from '../../../views/buttons/button-groups/ButtonPesquisa';
 
 export const TableClientes = ({ openModal }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [rows, setRows] = useState([]);
+  const [sortedField, setSortedField] = useState(null);
+  const [sortDirection, setSortDirection] = useState('asc');
+  const [currentPage, setCurrentPage] = useState(1);
+  const [rowsPerPage] = useState(10);
 
   useEffect(() => {
     const fetchClients = async () => {
       try {
-        const response = await axiosInstance.get('CategoryExpense');
+        const response = await axiosInstance.get('Customers');
         setRows(response.data);
       } catch (error) {
         console.error('Error fetching customers:', error);
@@ -48,15 +48,50 @@ export const TableClientes = ({ openModal }) => {
     setSearchTerm(e.target.value);
   };
 
-  const handleEdit = (id) => {
-    console.log('Edit item with id:', id);
-    // Adicione aqui a lógica para editar o item
+  const handleSort = (field) => {
+    const direction = sortedField === field && sortDirection === 'asc' ? 'desc' : 'asc';
+    setSortedField(field);
+    setSortDirection(direction);
   };
 
-  const handleDelete = (id) => {
-    console.log('Delete item with id:', id);
-    // Adicione aqui a lógica para deletar o item
+  const sortedRows = [...rows].sort((a, b) => {
+    if (a[sortedField] < b[sortedField]) {
+      return sortDirection === 'asc' ? -1 : 1;
+    }
+    if (a[sortedField] > b[sortedField]) {
+      return sortDirection === 'asc' ? 1 : -1;
+    }
+    return 0;
+  });
+
+  const filteredRows = sortedRows.filter((row) =>
+    row.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const indexOfLastRow = currentPage * rowsPerPage;
+  const indexOfFirstRow = indexOfLastRow - rowsPerPage;
+  const currentRows = filteredRows.slice(indexOfFirstRow, indexOfLastRow);
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
   };
+
+  const totalPages = Math.ceil(filteredRows.length / rowsPerPage);
+
+  const getCategoria = (status) => {
+    switch (status) {
+      case 'Aline Avelar':
+        return '#8B0000'
+      case 'Inactive':
+        return 'secondary'
+      case 'Pending':
+        return 'warning'
+      case 'Banned':
+        return 'danger'
+      default:
+        return 'primary'
+    }
+  }
 
   return (
     <CRow>
@@ -66,38 +101,100 @@ export const TableClientes = ({ openModal }) => {
             <strong>Cadastro de Clientes</strong>
           </CCardHeader>
 
-          <ButtonPesquisa openModal={openModal} />
+          <ButtonPesquisa openModal={openModal} value={searchTerm} onChange={handleSearchChange} />
 
           <CCardBody>
+            {/* <CInputGroup className="mb-3">
+              <CFormInput
+                placeholder="Buscar..."
+                value={searchTerm}
+                onChange={handleSearchChange}
+              />
+            </CInputGroup> */}
+
             <CTable>
               <CTableHead>
                 <CTableRow>
                   <CTableHeaderCell scope="col">Ações</CTableHeaderCell>
-                  <CTableHeaderCell scope="col">Id</CTableHeaderCell>
-                  <CTableHeaderCell scope="col">Nome</CTableHeaderCell>
-                  <CTableHeaderCell scope="col">Preço</CTableHeaderCell>
+                  <CTableHeaderCell scope="col" onClick={() => handleSort('id')}>
+                    Id {sortedField === 'id' && (sortDirection === 'asc' ? '↑' : '↓')}
+                  </CTableHeaderCell>
+                  <CTableHeaderCell scope="col" onClick={() => handleSort('name')}>
+                    Nome {sortedField === 'name' && (sortDirection === 'asc' ? '↑' : '↓')}
+                  </CTableHeaderCell>
+                  <CTableHeaderCell scope="col" onClick={() => handleSort('number')}>
+                    Número {sortedField === 'number' && (sortDirection === 'asc' ? '↑' : '↓')}
+                  </CTableHeaderCell>
+                  <CTableHeaderCell scope="col" onClick={() => handleSort('address')}>
+                    Endereço {sortedField === 'address' && (sortDirection === 'asc' ? '↑' : '↓')}
+                  </CTableHeaderCell>
+                  <CTableHeaderCell scope="col" onClick={() => handleSort('observation')}>
+                    Observação {sortedField === 'observation' && (sortDirection === 'asc' ? '↑' : '↓')}
+                  </CTableHeaderCell>
+                  <CTableHeaderCell scope="col" onClick={() => handleSort('issueDate')}>
+                    Data Cadastro {sortedField === 'issueDate' && (sortDirection === 'asc' ? '↑' : '↓')}
+                  </CTableHeaderCell>
                 </CTableRow>
               </CTableHead>
               <CTableBody>
-                {rows.map((row) => (
+                {currentRows.map((row) => (
                   <CTableRow key={row.id}>
                     <CTableDataCell style={{ padding: '1', textAlign: 'left', width: '90px' }}>
-                      <ButtonTable row={row} handleEdit={handleEdit} handleDelete={handleDelete} />
+                      <ButtonTable row={row} />
+                      {/* handleDelete={handleDelete} */}
+                      {/* handleEdit={handleEdit} */}
                     </CTableDataCell>
                     <CTableDataCell>{row.id}</CTableDataCell>
-                    <CTableDataCell>{row.name}</CTableDataCell>
-                    <CTableDataCell>
-                      {row.price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
+                    <CTableDataCell
+                      style={{
+                        textAlign: 'left', // Centraliza o conteúdo da célula
+                        verticalAlign: 'middle', // Garante o alinhamento vertical da célula
+                      }}
+                    >
+                      <span
+                        style={
+                          row.name === 'Aline Avelar'
+                            ? {
+                              backgroundColor: getCategoria(row.name),
+                              color: 'white',
+                              padding: '2px 5px', // Espaçamento interno para o estilo de botão
+                              borderRadius: '3px', // Arredondamento dos cantos
+                              fontWeight: 'bold',
+                              fontSize: '16px', // Tamanho da fonte
+                              display: 'inline-block', // Ajusta ao tamanho do conteúdo
+                              lineHeight: 'normal',
+                              textAlign: 'center', // Centraliza o texto dentro do "botão"
+                            }
+                            : {}
+                        }
+                      >
+                      {row.name}
+                      </span>
                     </CTableDataCell>
+                    <CTableDataCell>{row.number}</CTableDataCell>
+                    <CTableDataCell>{row.address}</CTableDataCell>
+                    <CTableDataCell>{row.observation}</CTableDataCell>
+                    <CTableDataCell>{row.issueDate}</CTableDataCell>
                   </CTableRow>
                 ))}
               </CTableBody>
             </CTable>
+
+            {/* Paginação */}
+            <CPagination className="mt-4">
+              {[...Array(totalPages)].map((_, idx) => (
+                <CPaginationItem
+                  key={idx + 1}
+                  active={idx + 1 === currentPage}
+                  onClick={() => handlePageChange(idx + 1)}
+                >
+                  {idx + 1}
+                </CPaginationItem>
+              ))}
+            </CPagination>
           </CCardBody>
         </CCard>
       </CCol>
     </CRow>
   );
 };
-
-// export default TableReceber
