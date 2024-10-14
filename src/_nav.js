@@ -220,7 +220,7 @@ const _nav = [
     component: CNavItem,
     name: 'Merge',
     to: '/base/merge',
-    icon: <MergeIcon customClassName="nav-icon" />,
+    icon: <MergeIcon customClassName="nav-icon" style={{ marginRight:'15px' }} />,
   },
   {
     component: CNavItem,

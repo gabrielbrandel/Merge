@@ -11,7 +11,7 @@ import {
   CAccordionHeader,
   CAccordionItem,
 } from '@coreui/react'
-import { TableMotoristas } from '../tables/TableMerge';
+import { TableMerge } from '../tables/TableMerge';
 import { TelaMotoristas } from '../../forms/merge/TelaMerge'
 import { CModal, CModalHeader, CModalBody, CModalFooter, CButton } from '@coreui/react';
 
@@ -32,7 +32,7 @@ const MergeMenu = () => {
       <CCol xs={12}>
         <CCardBody>
         </CCardBody>
-        <TableMotoristas openModal={openModal} />
+        <TableMerge openModal={openModal} />
         <CModal visible={modalVisible} onClose={closeModal} size="xl"  >
           <CModalBody>
             <TelaMotoristas closeModal={closeModal} />
