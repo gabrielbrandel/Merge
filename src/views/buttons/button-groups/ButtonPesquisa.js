@@ -5,7 +5,7 @@ import {
 } from '@coreui/react'
 import PostAddIcon from '@mui/icons-material/PostAdd';
 
-const ButtonPesquisa = ({ openModal, value, onChange }) => {
+const ButtonPesquisa = ({ openModal, value, onChange, exportToExcel }) => {
     return (
         <>
             <CInputGroup className="mb-2">
@@ -43,6 +43,22 @@ const ButtonPesquisa = ({ openModal, value, onChange }) => {
                     }}
                 >
                     <PostAddIcon />
+                </CButton>
+                <CButton
+                    color="primary"
+                    style={{
+                        height: '36px',
+                        backgroundColor: '#4682B4',
+                        borderColor: '#4682B4',
+                        color: 'white',
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        marginTop: '40px',
+                    }}
+                    onClick={exportToExcel}                     
+                >
+                    Exportar para Excel
                 </CButton>
             </CInputGroup>
         </>

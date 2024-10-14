@@ -17,11 +17,13 @@ import {
   CFormInput,
   CInputGroup,
   CPagination,
-  CPaginationItem
+  CPaginationItem, 
+  CButton,
 } from '@coreui/react';
 import axiosInstance from '../../../api/AxiosInstance';
 import ButtonTable from '../../../views/buttons/button-groups/ButtonTable';
 import ButtonPesquisa from '../../../views/buttons/button-groups/ButtonPesquisa';
+import * as XLSX from 'xlsx';
 
 export const TableClientes = ({ openModal }) => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -93,6 +95,16 @@ export const TableClientes = ({ openModal }) => {
     }
   }
 
+  const exportToExcel = () => {
+    // Cria uma nova planilha com os dados filtrados
+    const worksheet = XLSX.utils.json_to_sheet(filteredRows);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Clientes');
+
+    // Cria e baixa o arquivo Excel
+    XLSX.writeFile(workbook, 'clientes_filtrados.xlsx');
+  };
+
   return (
     <CRow>
       <CCol xs={12}>
@@ -101,7 +113,7 @@ export const TableClientes = ({ openModal }) => {
             <strong>Cadastro de Clientes</strong>
           </CCardHeader>
 
-          <ButtonPesquisa openModal={openModal} value={searchTerm} onChange={handleSearchChange} />
+          <ButtonPesquisa openModal={openModal} value={searchTerm} onChange={handleSearchChange} exportToExcel={exportToExcel} />
 
           <CCardBody>
             {/* <CInputGroup className="mb-3">
@@ -147,8 +159,8 @@ export const TableClientes = ({ openModal }) => {
                     <CTableDataCell>{row.id}</CTableDataCell>
                     <CTableDataCell
                       style={{
-                        textAlign: 'left', // Centraliza o conteúdo da célula
-                        verticalAlign: 'middle', // Garante o alinhamento vertical da célula
+                        textAlign: 'left', 
+                        verticalAlign: 'middle', 
                       }}
                     >
                       <span
@@ -157,13 +169,13 @@ export const TableClientes = ({ openModal }) => {
                             ? {
                               backgroundColor: getCategoria(row.name),
                               color: 'white',
-                              padding: '2px 5px', // Espaçamento interno para o estilo de botão
-                              borderRadius: '3px', // Arredondamento dos cantos
+                              padding: '2px 5px', 
+                              borderRadius: '3px',
                               fontWeight: 'bold',
-                              fontSize: '16px', // Tamanho da fonte
-                              display: 'inline-block', // Ajusta ao tamanho do conteúdo
+                              fontSize: '16px', 
+                              display: 'inline-block', 
                               lineHeight: 'normal',
-                              textAlign: 'center', // Centraliza o texto dentro do "botão"
+                              textAlign: 'center',
                             }
                             : {}
                         }
