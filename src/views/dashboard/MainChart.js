@@ -1,9 +1,8 @@
 import React, { useEffect, useRef } from 'react'
-
 import { CChartLine } from '@coreui/react-chartjs'
 import { getStyle } from '@coreui/utils'
 
-const MainChart = () => {
+const MainChart = ({ data }) => {
   const chartRef = useRef(null)
 
   useEffect(() => {
@@ -26,7 +25,15 @@ const MainChart = () => {
     })
   }, [chartRef])
 
-  const random = () => Math.round(Math.random() * 100)
+  const chartLabels = data.map((item) => item.mes)
+
+  const mergesData = data.map((item) => item.merges)
+
+  const bugDeImpactoData = data.map((item) => item.bugDeImpacto)
+  const bugSemImpactoData = data.map((item) => item.bugSemImpacto)
+  const bugErroInternoData = data.map((item) => item.erroInterno)
+  const alteracaoData = data.map((item) => item.alteracao)
+  const outrosData = data.map((item) => item.outros)
 
   return (
     <>
@@ -34,49 +41,56 @@ const MainChart = () => {
         ref={chartRef}
         style={{ height: '300px', marginTop: '40px' }}
         data={{
-          labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+          labels: chartLabels,
           datasets: [
+            // {
+            //   label: 'Merges',
+            //   backgroundColor: `rgba(${getStyle('--cui-info-rgb')}, .1)`,
+            //   borderColor: getStyle('--cui-info'),
+            //   pointHoverBackgroundColor: getStyle('--cui-info'),
+            //   borderWidth: 2,
+            //   data: mergesData,
+            //   fill: true,
+            // },
             {
-              label: 'My First dataset',
-              backgroundColor: `rgba(${getStyle('--cui-info-rgb')}, .1)`,
-              borderColor: getStyle('--cui-info'),
-              pointHoverBackgroundColor: getStyle('--cui-info'),
+              label: 'Bug de Impacto',
+              backgroundColor: 'transparent',
+              borderColor: getStyle('--cui-danger'),
+              pointHoverBackgroundColor: getStyle('--cui-danger'),
               borderWidth: 2,
-              data: [
-                random(50, 200),
-                random(50, 200),
-                random(50, 200),
-                random(50, 200),
-                random(50, 200),
-                random(50, 200),
-                random(50, 200),
-              ],
-              fill: true,
+              data: bugDeImpactoData,
             },
             {
-              label: 'My Second dataset',
+              label: 'Bug Sem Impacto',
+              backgroundColor: 'transparent',
+              borderColor: getStyle('--cui-warning'),
+              pointHoverBackgroundColor: getStyle('--cui-warning'),
+              borderWidth: 2,
+              data: bugSemImpactoData,
+            },
+            {
+              label: 'Erro Interno',
+              backgroundColor: 'transparent',
+              borderColor: getStyle('--cui-warning'),
+              pointHoverBackgroundColor: getStyle('--cui-warning'),
+              borderWidth: 2,
+              data: bugErroInternoData,
+            },
+            {
+              label: 'Alteração do Sistema',
               backgroundColor: 'transparent',
               borderColor: getStyle('--cui-success'),
               pointHoverBackgroundColor: getStyle('--cui-success'),
               borderWidth: 2,
-              data: [
-                random(50, 200),
-                random(50, 200),
-                random(50, 200),
-                random(50, 200),
-                random(50, 200),
-                random(50, 200),
-                random(50, 200),
-              ],
+              data: alteracaoData,
             },
             {
-              label: 'My Third dataset',
+              label: 'Outros',
               backgroundColor: 'transparent',
-              borderColor: getStyle('--cui-danger'),
-              pointHoverBackgroundColor: getStyle('--cui-danger'),
-              borderWidth: 1,
-              borderDash: [8, 5],
-              data: [65, 65, 65, 65, 65, 65, 65],
+              borderColor: getStyle('--cui-info'),
+              pointHoverBackgroundColor: getStyle('--cui-info'),
+              borderWidth: 2,
+              data: outrosData,
             },
           ],
         }}
@@ -84,7 +98,7 @@ const MainChart = () => {
           maintainAspectRatio: false,
           plugins: {
             legend: {
-              display: false,
+              display: true,
             },
           },
           scales: {
@@ -105,11 +119,8 @@ const MainChart = () => {
               grid: {
                 color: getStyle('--cui-border-color-translucent'),
               },
-              max: 250,
               ticks: {
                 color: getStyle('--cui-body-color'),
-                maxTicksLimit: 5,
-                stepSize: Math.ceil(250 / 5),
               },
             },
           },
