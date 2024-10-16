@@ -23,27 +23,10 @@ const ButtonPesquisa = ({ openModal, value, onChange, exportToExcel }) => {
                         alignItems: 'center',
                         marginTop: '40px',
                         marginLeft: '10px',
-                        maxWidth: '200px',
+                        maxWidth: '350px',
 
                     }}
                 />
-                <CButton
-                    color="terciary"
-                    type="submit"
-                    onClick={openModal}
-                    style={{
-                        height: '36px',
-                        backgroundColor: '#2E8B57',
-                        borderColor: '#2E8B57',
-                        color: 'white',
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        marginTop: '40px',
-                    }}
-                >
-                    <PostAddIcon />
-                </CButton>
                 <CButton
                     color="primary"
                     style={{
@@ -56,7 +39,7 @@ const ButtonPesquisa = ({ openModal, value, onChange, exportToExcel }) => {
                         alignItems: 'center',
                         marginTop: '40px',
                     }}
-                    onClick={exportToExcel}                     
+                    onClick={exportToExcel}
                 >
                     Exportar para Excel
                 </CButton>
