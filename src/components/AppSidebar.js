@@ -13,8 +13,12 @@ import CIcon from '@coreui/icons-react'
 
 import { AppSidebarNav } from './AppSidebarNav'
 
+// import logo from '../assets/brand/logo2.jpg'
+import { logo } from 'src/assets/brand/logo'
+import { sygnet } from 'src/assets/brand/sygnet'
 import '../scss/_custom.scss'
 
+// sidebar nav config
 import navigation from '../_nav'
 
 const AppSidebar = () => {
@@ -35,10 +39,9 @@ const AppSidebar = () => {
     >
       <CSidebarHeader className="border-bottom">
         <CSidebarBrand to="/">
-          {/* Dashboard Merge Control */}
-          {/* <CIcon customClassName="sidebar-brand-full" icon={logo} height={32} /> */}
+          <CIcon customClassName="sidebar-brand-full" icon={logo} height={32} />
           {/* <img className="sidebar-brand-full" src={logo} alt="Logo" height={100} width={225} /> */}
-          {/* <CIcon customClassName="sidebar-brand-narrow" icon={sygnet} height={32} /> */}
+          <CIcon customClassName="sidebar-brand-narrow" icon={sygnet} height={32} />
         </CSidebarBrand>
         <CCloseButton
           className="d-lg-none"
