@@ -71,8 +71,8 @@ const MainChart = ({ data }) => {
             {
               label: 'Erro Interno',
               backgroundColor: 'transparent',
-              borderColor: getStyle('--cui-warning'),
-              pointHoverBackgroundColor: getStyle('--cui-warning'),
+              borderColor: getStyle('--cui-primary'),
+              pointHoverBackgroundColor: getStyle('--cui-primary'),
               borderWidth: 2,
               data: bugErroInternoData,
             },

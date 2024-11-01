@@ -31,12 +31,23 @@ const AppHeader = () => {
   const dispatch = useDispatch()
   const sidebarShow = useSelector((state) => state.sidebarShow)
 
+  // Persiste o colorMode no localStorage
+  useEffect(() => {
+    const storedColorMode = localStorage.getItem('colorMode')
+    if (storedColorMode && storedColorMode !== colorMode) {
+      setColorMode(storedColorMode)
+    }
+  }, [])
+
   useEffect(() => {
     document.addEventListener('scroll', () => {
       headerRef.current &&
         headerRef.current.classList.toggle('shadow-sm', document.documentElement.scrollTop > 0)
     })
-  }, [])
+
+    // Armazena o colorMode no localStorage sempre que ele for alterado
+    localStorage.setItem('colorMode', colorMode)
+  }, [colorMode])
 
   return (
     <CHeader position="sticky" className="mb-4 p-0" ref={headerRef}>
@@ -57,9 +68,7 @@ const AppHeader = () => {
             <CNavLink href="/base/merge#/base/merge">Merge</CNavLink>
           </CNavItem>
         </CHeaderNav>
-        <CHeaderNav className="ms-auto">
-
-        </CHeaderNav>
+        <CHeaderNav className="ms-auto"></CHeaderNav>
         <CHeaderNav>
           <li className="nav-item py-1">
             <div className="vr h-100 mx-2 text-body text-opacity-75"></div>

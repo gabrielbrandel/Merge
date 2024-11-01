@@ -27,7 +27,7 @@ const ButtonPesquisa = ({ openModal, value, onChange, exportToExcel }) => {
 
                     }}
                 />
-                <CButton
+                {/* <CButton
                     color="primary"
                     style={{
                         height: '36px',
@@ -42,7 +42,7 @@ const ButtonPesquisa = ({ openModal, value, onChange, exportToExcel }) => {
                     onClick={exportToExcel}
                 >
                     Exportar para Excel
-                </CButton>
+                </CButton> */}
             </CInputGroup>
         </>
     );

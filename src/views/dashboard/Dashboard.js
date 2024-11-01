@@ -125,7 +125,7 @@ const Dashboard = () => {
   const progressExample = [
     { title: 'Bug de Impacto', value: `${totalMergesBugDeImpacto?.toString()}`, percent: obterPercentual(totalMergesBugDeImpacto), color: 'danger' },
     { title: 'Bug Sem Impacto', value: `${totalMergesBugSemImpacto?.toString()}`, percent: obterPercentual(totalMergesBugSemImpacto), color: 'warning' },
-    { title: 'Erro Interno', value: `${totalMergesBugErroInterno?.toString()}`, percent: obterPercentual(totalMergesBugErroInterno), color: 'warning' },
+    { title: 'Erro Interno', value: `${totalMergesBugErroInterno?.toString()}`, percent: obterPercentual(totalMergesBugErroInterno), color: 'primary' },
     { title: 'Alteração do Sistema', value: `${totalMergesAlteracoes?.toString()}`, percent: obterPercentual(totalMergesAlteracoes), color: 'success' },
     { title: 'Outros', value: `${totalMergesBugOutros?.toString()}`, percent: obterPercentual(totalMergesBugOutros), color: 'info' },
   ]

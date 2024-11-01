@@ -46,7 +46,7 @@ const WidgetsDropdown = ({ naoprevisto, tarefa, erro, outros, className }) => {
             <>
               {erro ? erro.merges : 'N/A'}{' '}
               <span className="fs-6 fw-normal">
-                (40.9% <CIcon icon={cilArrowTop} />)
+                (41.9% <CIcon icon={cilArrowTop} />)
               </span>
             </>
           }

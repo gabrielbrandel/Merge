@@ -20,18 +20,22 @@ import {
   CPaginationItem,
   CButton,
   CFormSelect,
+  useColorModes,
 } from '@coreui/react';
 import axiosInstance from '../../../api/AxiosInstance';
-import ButtonPesquisa from '../../../views/buttons/button-groups/ButtonPesquisa';
+import ButtonPesquisa from '../../buttons/button-groups/ButtonPesquisa';
 import formatDate from '../data/FormatData'
 import PostAddIcon from '@mui/icons-material/PostAdd';
 import * as XLSX from 'xlsx';
 import InputFiltros from '../../buttons/button-groups/InputFiltros';
+import Select from 'react-select';
+import ButtonToggle from '../../buttons/buttons/ButtonToggle';
+import ButtonSelect from '../../buttons/buttons/ButtonSelect';
 
 const today = new Date().toISOString().split('T')[0];
 const firstDay = new Date(new Date().getFullYear(), new Date().getMonth(), 1).toISOString().split('T')[0];
 
-export const TableMerge = ({ openModal }) => {
+export const TablePesquisa = ({ openModal }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [rows, setRows] = useState([]);
 
@@ -44,19 +48,26 @@ export const TableMerge = ({ openModal }) => {
   const [isPressed, setIsPressed] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [pageRangeStart, setPageRangeStart] = useState(1);
+  const [toggle, setToggle] = useState('ambas');
 
   const itemsPerPage = 25;
   const [expandedRow, setExpandedRow] = useState(null);
   const [filters, setFilters] = useState({
-    fkIdOrdemServico: '',
-    categoria: '',
-    descricaoEquipe: '',
-    nomeUsuario: '',
-    motivo: '',
-    status: '',
-    versao: '',
-    dataHora: ''
+    ticket : '',
+    categoria : '',
+    nomeEmpresa : '',
+    descricaoModulo : '',
+    tecnico : '',
+    status : ''
   });
+  const [selectedOptions, setSelectedOptions] = useState({
+    selectedOptions1: [],
+    selectedOptions2: [],
+    filtro1: '',
+    filtro2: ''
+  });
+
+  // descricaoEquipe : '',
 
   const handleFilterChange = (column, value) => {
     setFilters({ ...filters, [column]: value.toLowerCase() });
@@ -77,46 +88,20 @@ export const TableMerge = ({ openModal }) => {
   });
 
   const filteredRows = sortedRows.filter((row) => {
+
     return (
-      row.fkIdOrdemServico?.toString().includes(filters.fkIdOrdemServico) &&
+      row.ticket?.toString().includes(filters.ticket) &&
       (typeof row.categoria === 'string' ? row.categoria.toLowerCase() : '').includes(filters.categoria) &&
-      (typeof row.descricaoEquipe === 'string' ? row.descricaoEquipe.toLowerCase() : '').includes(filters.descricaoEquipe) &&
-      (row.nomeUsuario && Array.isArray(row.nomeUsuario)
-        ? row.nomeUsuario.some(nome => nome.toLowerCase().includes(filters.nomeUsuario.toLowerCase()))
-        : ''
-      ) &&
-      (row.motivo && Array.isArray(row.motivo)
-        ? row.motivo.some(nome => nome.toLowerCase().includes(filters.motivo.toLowerCase()))
-        : ''
-      ) &&
-      (row.status && Array.isArray(row.status)
-        ? row.status.some(nome => nome.toLowerCase().includes(filters.status.toLowerCase()))
-        : ''
-      ) &&
-      (row.versao && Array.isArray(row.versao)
-        ? row.versao.some(nome => {
-          const isDate = !isNaN(Date.parse(nome));
-          if (isDate) {
-            const formattedDate = new Date(nome).toLocaleDateString('pt-BR', {
-              day: '2-digit',
-              month: '2-digit',
-              year: '2-digit'
-            });
-            const formattedFilter = new Date(filters.versao).toLocaleDateString('pt-BR', {
-              day: '2-digit',
-              month: '2-digit',
-              year: '2-digit'
-            });
-            return formattedDate === formattedFilter;
-          }
-          return nome.toLowerCase().includes(filters.versao.toLowerCase());
-        })
-        : ''
-      )
-
-
+        row.nomeEmpresa.toLowerCase().includes(filters.nomeEmpresa) &&
+        row.descricaoModulo.toLowerCase().includes(filters.descricaoModulo) &&
+        (typeof row.tecnico === 'string' ? row.tecnico.toLowerCase() : '').includes(filters.tecnico) &&
+        (typeof row.status === 'string' ? row.status.toLowerCase() : '').includes(filters.status)
+        // row.tecnico.toLowerCase().includes(filters.tecnico)
+      // (typeof row.descricaoModulo === 'string' ? row.descricaoModulo.toLowerCase() : '').includes(filters.descricaoModulo) &&
+      // (typeof row.status === 'string' ? row.status.toLowerCase() : '').includes(filters.status)
     );
   });
+  // (typeof row.descricaoEquipe === 'string' ? row.descricaoEquipe.toLowerCase() : '').includes(filters.descricaoEquipe) &&
 
   const totalPages = Math.ceil(filteredRows.length / rowsPerPage);
   const [startDate, setStartDate] = useState(localStorage.getItem('startDate') || firstDay);
@@ -170,13 +155,57 @@ export const TableMerge = ({ openModal }) => {
   const fetchMerges = async () => {
     try {
       setIsLoading(true);
-      let query = 'Merges';
+
+      localStorage.setItem('rows', JSON.stringify([]));
+
+      const camposNumericos = ["empresa", "codigoCliente", "ticket", "codigoCategoria"];
+
+      let query = 'Consulta/sgps';
       if (startDate && endDate) {
         query += `?startDate=${startDate}&endDate=${endDate}`;
       }
 
+      const selectedOptions1String = selectedOptions.selectedOptions1
+        .map(option => {
+          const value = selectedOptions.filtro1;
+          if (camposNumericos.includes(option.value) && isNaN(value)) {
+            alert(`Não é possível realizar a consulta: o valor de '${option.value}' deve ser numérico.`);
+            throw new Error("Consulta interrompida devido a valor não numérico.");
+          }
+          return `&${option.value}=${value}`;
+        })
+        .join("");
+
+      const selectedOptions2String = selectedOptions.selectedOptions2
+        .map(option => {
+          const value = selectedOptions.filtro2;
+          if (camposNumericos.includes(option.value) && isNaN(value)) {
+            alert(`Não é possível realizar a consulta: o valor de '${option.value}' deve ser numérico.`);
+            throw new Error("Consulta interrompida devido a valor não numérico.");
+          }
+          return `&${option.value}=${value}`;
+        })
+        .join("");
+
+      const resultString = `${selectedOptions1String}${selectedOptions2String}`;
+
+      if (toggle && toggle.trim() !== '') {
+        if (toggle === 'Abertas') {
+          query += `&statusAberto=1`;
+        } else if (toggle === 'Fechadas') {
+          query += `&statusFechado=1`;
+        }
+      }
+
+      query += resultString;
+      console.log('result:', query);
+
       const response = await axiosInstance.get(query);
-      setRows(response.data);
+      const fetchedRows = response.data.data || [];
+
+      localStorage.setItem('rows', JSON.stringify(fetchedRows));
+      setRows(response.data.data);
+
     } catch (error) {
       console.error('Error fetching customers:', error);
     } finally {
@@ -184,9 +213,14 @@ export const TableMerge = ({ openModal }) => {
     }
   };
 
+
   useEffect(() => {
-    fetchMerges();
+    const savedRows = localStorage.getItem('rows');
+    if (savedRows) {
+      setRows(JSON.parse(savedRows));
+    }
   }, []);
+
 
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
@@ -231,6 +265,16 @@ export const TableMerge = ({ openModal }) => {
     switch (status) {
       case 'IMPLEMENTACAO':
         return '11px'
+      case 'DUVIDAS':
+        return '18px'
+      case 'RECLAMACOES':
+        return '7px'
+      case 'DOCUMENTACAO':
+        return '11px'
+      case 'SENHA ADMINISTRATIVO':
+        return '11px'
+      case 'SENHA':
+        return '21px'
       default:
         return '13px'
     }
@@ -252,17 +296,66 @@ export const TableMerge = ({ openModal }) => {
     XLSX.writeFile(workbook, 'merges_filtrados.xlsx');
   };
 
+  const { colorMode } = useColorModes('coreui-free-react-admin-template-theme')
+
+  const customStyles = {
+    control: (provided, state) => ({
+      ...provided,
+      borderColor: 'var(--cui-primary)', // Borda com a cor primária
+      backgroundColor: colorMode === 'dark' ? 'var(--cui-dark)' : 'var(--cui-light)',
+      '&:hover': { borderColor: 'var(--cui-primary)' },
+      boxShadow: `0 0 0 1px var(--cui-primary)`,
+    }),
+    menu: (provided) => ({
+      ...provided,
+      backgroundColor: colorMode === 'dark' ? 'var(--cui-dark)' : 'var(--cui-light)',
+      zIndex: 9999,
+    }),
+    option: (provided, state) => ({
+      ...provided,
+      backgroundColor: state.isFocused ? 'var(--cui-primary)' : colorMode === 'dark' ? 'var(--cui-dark)' : 'var(--cui-light)',
+      color: state.isFocused ? 'var(--cui-light)' : colorMode === 'dark' ? 'var(--cui-light)' : 'var(--cui-dark)',
+      '&:hover': {
+        backgroundColor: 'var(--cui-primary)',
+        color: 'var(--cui-light)',
+      },
+    }),
+    multiValue: (provided) => ({
+      ...provided,
+      backgroundColor: 'var(--cui-primary)',
+      color: colorMode === 'dark' ? 'var(--cui-dark)' : 'var(--cui-light)',
+    }),
+    multiValueLabel: (provided) => ({
+      ...provided,
+      color: 'var(--cui-light)',
+
+    }),
+    multiValueRemove: (provided) => ({
+      ...provided,
+      color: colorMode === 'dark' ? 'var(--cui-dark)' : 'var(--cui-light)',
+      '&:hover': {
+        backgroundColor: 'var(--cui-danger)',
+        color: colorMode === 'dark' ? 'var(--cui-dark)' : 'var(--cui-light)',
+      },
+    }),
+  };
+
+  const handleSelectedOptionsChange = (newSelectedOptions) => {
+    setSelectedOptions(newSelectedOptions);
+    console.log('filtros:', newSelectedOptions);
+  };
+
   return (
     <CRow>
       <CCol xs={12} md={12} lg={12}>
         <CCard className="mb-4">
           <CCardHeader>
-            <strong>Controle de Merges</strong>
+            <strong>Pesquisar Ticket</strong>
           </CCardHeader>
 
-          {/* <ButtonPesquisa value={searchTerm} onChange={handleSearchChange} exportToExcel={exportToExcel} /> */}
+          <ButtonSelect onSelectedOptionsChange={handleSelectedOptionsChange}/>
 
-          <CInputGroup className="mb-3" style={{ marginLeft: '20px', marginTop: '20px' }}>
+          <CInputGroup className="mb-3" style={{ marginLeft: '22px' }}>
             <CCol md={2}>
               <CFormLabel htmlFor="validationCustom05" style={{ marginLeft: '10px' }}>
                 Início
@@ -277,7 +370,7 @@ export const TableMerge = ({ openModal }) => {
               <CFormInput type="date" id="validationCustom05" value={endDate} onChange={(e) => handleEndDateChange(e.target.value)} />
             </CCol>
 
-            <CCol md={2} style={{ marginLeft: '5px', width:'80px' }}>
+            <CCol md={2} style={{ marginLeft: '5px', width: '80px' }}>
               <CFormLabel htmlFor="validationCustom05" style={{ marginLeft: '10px' }}>
                 Linhas
               </CFormLabel>
@@ -288,6 +381,7 @@ export const TableMerge = ({ openModal }) => {
                 <option value="100">100</option>
               </CFormSelect>
             </CCol>
+            <ButtonToggle setFilter={setToggle} />
             <CButton
               color="terciary"
               type="submit"
@@ -328,29 +422,29 @@ export const TableMerge = ({ openModal }) => {
             <CTable style={{ width: 'auto', tableLayout: 'auto' }}>
               <CTableHead>
                 <CTableRow>
-                  <CTableHeaderCell style={{ width: '110px' }} scope="col" onClick={() => handleSort('fkIdOrdemServico')}>
-                    O.S {sortedField === 'fkIdOrdemServico' && (sortDirection === 'asc' ? '↑' : '↓')}
+                  <CTableHeaderCell style={{ width: '110px' }} scope="col" onClick={() => handleSort('ticket')}>
+                    O.S {sortedField === 'ticket' && (sortDirection === 'asc' ? '↑' : '↓')}
                   </CTableHeaderCell>
                   <CTableHeaderCell style={{ width: '120px' }} scope="col" onClick={() => handleSort('categoria')}>
                     Categoria {sortedField === 'categoria' && (sortDirection === 'asc' ? '↑' : '↓')}
                   </CTableHeaderCell>
-                  <CTableHeaderCell scope="col" onClick={() => handleSort('descricaoEquipe')}>
+                  {/* <CTableHeaderCell style={{ maxWidth: '100px' }} scope="col" onClick={() => handleSort('descricaoEquipe')}>
                     Equipe {sortedField === 'descricaoEquipe' && (sortDirection === 'asc' ? '↑' : '↓')}
+                  </CTableHeaderCell> */}
+                  <CTableHeaderCell style={{ width: '300px' }} scope="col" onClick={() => handleSort('nomeEmpresa')}>
+                    Nome Empresa {sortedField === 'nomeEmpresa' && (sortDirection === 'asc' ? '↑' : '↓')}
                   </CTableHeaderCell>
-                  <CTableHeaderCell scope="col" onClick={() => handleSort('nomeUsuario')}>
-                    Usuário {sortedField === 'nomeUsuario' && (sortDirection === 'asc' ? '↑' : '↓')}
+                  <CTableHeaderCell style={{ width: '150px' }} scope="col" onClick={() => handleSort('descricaoModulo')}>
+                    Modulo {sortedField === 'descricaoModulo' && (sortDirection === 'asc' ? '↑' : '↓')}
                   </CTableHeaderCell>
-                  <CTableHeaderCell style={{ width: '400px' }} scope="col" onClick={() => handleSort('motivo')}>
-                    Motivo {sortedField === 'motivo' && (sortDirection === 'asc' ? '↑' : '↓')}
+                  <CTableHeaderCell style={{ width: '350px' }} scope="col" onClick={() => handleSort('tecnico')}>
+                    Técnico {sortedField === 'tecnico' && (sortDirection === 'asc' ? '↑' : '↓')}
                   </CTableHeaderCell>
-                  <CTableHeaderCell style={{ width: '100px' }} scope="col" onClick={() => handleSort('status')}>
+                  <CTableHeaderCell style={{ width: '120px' }} scope="col" onClick={() => handleSort('status')}>
                     Status {sortedField === 'status' && (sortDirection === 'asc' ? '↑' : '↓')}
                   </CTableHeaderCell>
-                  <CTableHeaderCell scope="col" onClick={() => handleSort('versao')}>
-                    Data Versão {sortedField === 'versao' && (sortDirection === 'asc' ? '↑' : '↓')}
-                  </CTableHeaderCell>
-                  <CTableHeaderCell scope="col" onClick={() => handleSort('dataHora')}>
-                    Data {sortedField === 'dataHora' && (sortDirection === 'asc' ? '↑' : '↓')}
+                  <CTableHeaderCell scope="col" onClick={() => handleSort('data')}>
+                    Data {sortedField === 'data' && (sortDirection === 'asc' ? '↑' : '↓')}
                   </CTableHeaderCell>
                   <CTableHeaderCell scope="col">
                   </CTableHeaderCell>
@@ -364,7 +458,7 @@ export const TableMerge = ({ openModal }) => {
                 <CTableRow>
                   <CTableDataCell>
                     <CFormInput
-                      onChange={(e) => handleFilterChange('fkIdOrdemServico', e.target.value)}
+                      onChange={(e) => handleFilterChange('ticket', e.target.value)}
                     />
                   </CTableDataCell>
                   <CTableDataCell>
@@ -372,19 +466,24 @@ export const TableMerge = ({ openModal }) => {
                       onChange={(e) => handleFilterChange('categoria', e.target.value)}
                     />
                   </CTableDataCell>
-                  <CTableDataCell>
+                  {/* <CTableDataCell>
                     <CFormInput
                       onChange={(e) => handleFilterChange('descricaoEquipe', e.target.value)}
                     />
-                  </CTableDataCell>
+                  </CTableDataCell> */}
                   <CTableDataCell>
                     <CFormInput
-                      onChange={(e) => handleFilterChange('nomeUsuario', e.target.value)}
+                      onChange={(e) => handleFilterChange('nomeEmpresa', e.target.value)}
                     />
                   </CTableDataCell>
                   <CTableDataCell>
                     <CFormInput
-                      onChange={(e) => handleFilterChange('motivo', e.target.value)}
+                      onChange={(e) => handleFilterChange('descricaoModulo', e.target.value)}
+                    />
+                  </CTableDataCell>
+                  <CTableDataCell>
+                    <CFormInput
+                      onChange={(e) => handleFilterChange('tecnico', e.target.value)}
                     />
                   </CTableDataCell>
                   <CTableDataCell>
@@ -392,11 +491,11 @@ export const TableMerge = ({ openModal }) => {
                       onChange={(e) => handleFilterChange('status', e.target.value)}
                     />
                   </CTableDataCell>
-                  <CTableDataCell>
+                  {/* <CTableDataCell>
                     <CFormInput
                       onChange={(e) => handleFilterChange('versao', e.target.value)}
                     />
-                  </CTableDataCell>
+                  </CTableDataCell> */}
                   <CTableDataCell></CTableDataCell>
                   <CTableDataCell></CTableDataCell>
                 </CTableRow>
@@ -405,9 +504,9 @@ export const TableMerge = ({ openModal }) => {
               </CTableHead>
               <CTableBody>
                 {currentRows.map((row) => (
-                  <React.Fragment key={row.fkIdOrdemServico}>
-                    <CTableRow key={row.fkIdOrdemServico}>
-                      <CTableDataCell>{row.fkIdOrdemServico}</CTableDataCell>
+                  <React.Fragment key={row.ticket}>
+                    <CTableRow key={row.ticket}>
+                      <CTableDataCell>{row.ticket}</CTableDataCell>
                       <CTableDataCell
                         style={{
                           textAlign: 'left',
@@ -432,6 +531,7 @@ export const TableMerge = ({ openModal }) => {
                                 paddingTop: '6px',
                                 height: '40px',
                                 width: '110px',
+                                // width: '170px',
                               }
                               : {}
                           }
@@ -439,65 +539,22 @@ export const TableMerge = ({ openModal }) => {
                           {row.categoria}
                         </span>
                       </CTableDataCell>
-                      <CTableDataCell>{row.descricaoEquipe}</CTableDataCell>
-                      <CTableDataCell>{row.nomeUsuario[0]}</CTableDataCell>
-                      <CTableDataCell  >{row.motivo[0]}</CTableDataCell>
-                      <CTableDataCell>{row.status[0]}</CTableDataCell>
-                      <CTableDataCell>{row.versao[0]}</CTableDataCell>
-                      <CTableDataCell>{formatDate(row.dataHora[0])}</CTableDataCell>
-                      <CTableDataCell>
-                        <CButton
-                          style={{ display: setDisplayButton(row.nomeUsuario[1])}}
-                          color="primary"
-                          variant="outline"
-                          size="sm"
-                          onClick={() => toggleExpand(row.fkIdOrdemServico)}
-                        >
-                          {expandedRow === row.fkIdOrdemServico ? 'Recolher' : 'Expandir'}
-                        </CButton>
+                      {/* <CTableDataCell>{row.descricaoEquipe}</CTableDataCell> */}
+                      <CTableDataCell>{row.nomeEmpresa}</CTableDataCell>
+                      <CTableDataCell
+                        style={{
+                          textAlign: 'left',
+                          verticalAlign: 'middle',
+                          width: '150px',
+                          height: '40px'
+                        }}
+                      >
+                        {row.descricaoModulo}
                       </CTableDataCell>
-                      {/* <CTableDataCell>{row.ticketMilestone}</CTableDataCell> */}
-                      {/* <CTableDataCell>{row.autorizado}</CTableDataCell> */}
+                      <CTableDataCell  >{row.tecnico}</CTableDataCell>
+                      <CTableDataCell>{row.status}</CTableDataCell>
+                      <CTableDataCell>{formatDate(row.data)}</CTableDataCell>
                     </CTableRow>
-                    {expandedRow === row.fkIdOrdemServico && (
-                      <>
-
-                        {/* <CTableRow>
-                          <CTableHeaderCell colSpan="3" scope="col" >
-                          </CTableHeaderCell>
-                          <CTableHeaderCell scope="col">
-                            Usuário
-                          </CTableHeaderCell>
-                          <CTableHeaderCell scope="col">
-                            Motivo
-                          </CTableHeaderCell>
-                          <CTableHeaderCell scope="col">
-                            Status
-                          </CTableHeaderCell>
-                          <CTableHeaderCell scope="col">
-                            Data Versão
-                          </CTableHeaderCell>
-                          <CTableHeaderCell scope="col">
-                            Data
-                          </CTableHeaderCell>
-                        </CTableRow> */}
-
-                        {row.nomeUsuario?.slice(1).map((_, index) => (
-                          <CTableRow key={index + 1}> {/* Use index + 1 para garantir que a key corresponda ao índice correto */}
-                            <CTableDataCell>{''}</CTableDataCell>
-                            <CTableDataCell>{''}</CTableDataCell>
-                            <CTableDataCell>{''}</CTableDataCell>
-                            <CTableDataCell>{row.nomeUsuario?.[index + 1] || ''}</CTableDataCell> {/* Usar index + 1 para acessar a posição correta */}
-                            <CTableDataCell>{row.motivo?.[index + 1] || ''}</CTableDataCell>
-                            <CTableDataCell>{row.status?.[index + 1] || ''}</CTableDataCell>
-                            <CTableDataCell>{row.versao?.[index + 1] || ''}</CTableDataCell>
-                            <CTableDataCell>{row.dataHora?.[index + 1] ? formatDate(row.dataHora[index + 1]) : ''}</CTableDataCell>
-                          </CTableRow>
-                        ))}
-
-                      </>
-                    )}
-
                   </React.Fragment>
                 ))}
               </CTableBody>
