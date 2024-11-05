@@ -1,51 +1,34 @@
 import {
     CButton,
     CInputGroup,
-    CFormInput,
 } from '@coreui/react'
-import PostAddIcon from '@mui/icons-material/PostAdd';
+import SearchIcon from '@mui/icons-material/Search';
+import { TelaPesquisa } from '../../forms/pesquisa/TelaPesquisa';
 
-const ButtonPesquisa = ({ openModal, value, onChange, exportToExcel }) => {
+const ButtonPesquisa = ({ openModal }) => {
     return (
         <>
             <CInputGroup className="mb-2">
-                <CFormInput
-                    type="text"
-                    id="validationCustom01"
-                    placeholder=" Pesquisar"
-                    value={value}
-                    onChange={onChange}
-                    style={{
-                        height: '36px',
-                        padding: 0,
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        marginTop: '40px',
-                        marginLeft: '10px',
-                        maxWidth: '350px',
-
-                    }}
-                />
-                {/* <CButton
+                <CButton
                     color="primary"
+                    variant="outline"
+                    size="sm"
                     style={{
                         height: '36px',
-                        backgroundColor: '#4682B4',
-                        borderColor: '#4682B4',
-                        color: 'white',
                         display: 'flex',
                         justifyContent: 'center',
                         alignItems: 'center',
-                        marginTop: '40px',
                     }}
-                    onClick={exportToExcel}
+                    onClick={openModal}
                 >
-                    Exportar para Excel
-                </CButton> */}
+                    <SearchIcon />
+                     SGPS
+                </CButton>
             </CInputGroup>
         </>
     );
 }
+
+
 
 export default ButtonPesquisa

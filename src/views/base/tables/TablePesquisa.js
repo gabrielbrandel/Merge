@@ -21,6 +21,9 @@ import {
   CButton,
   CFormSelect,
   useColorModes,
+  CModal,
+  CModalBody,
+  CModalHeader,
 } from '@coreui/react';
 import axiosInstance from '../../../api/AxiosInstance';
 import ButtonPesquisa from '../../buttons/button-groups/ButtonPesquisa';
@@ -31,11 +34,12 @@ import InputFiltros from '../../buttons/button-groups/InputFiltros';
 import Select from 'react-select';
 import ButtonToggle from '../../buttons/buttons/ButtonToggle';
 import ButtonSelect from '../../buttons/buttons/ButtonSelect';
+import { TelaPesquisa } from '../../forms/pesquisa/TelaPesquisa';
 
 const today = new Date().toISOString().split('T')[0];
 const firstDay = new Date(new Date().getFullYear(), new Date().getMonth(), 1).toISOString().split('T')[0];
 
-export const TablePesquisa = ({ openModal }) => {
+export const TablePesquisa = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [rows, setRows] = useState([]);
 
@@ -53,12 +57,12 @@ export const TablePesquisa = ({ openModal }) => {
   const itemsPerPage = 25;
   const [expandedRow, setExpandedRow] = useState(null);
   const [filters, setFilters] = useState({
-    ticket : '',
-    categoria : '',
-    nomeEmpresa : '',
-    descricaoModulo : '',
-    tecnico : '',
-    status : ''
+    ticket: '',
+    categoria: '',
+    nomeEmpresa: '',
+    descricaoModulo: '',
+    tecnico: '',
+    status: ''
   });
   const [selectedOptions, setSelectedOptions] = useState({
     selectedOptions1: [],
@@ -67,7 +71,20 @@ export const TablePesquisa = ({ openModal }) => {
     filtro2: ''
   });
 
-  // descricaoEquipe : '',
+  const [modalVisible, setModalVisible] = useState(false);
+  const [selectedRow, setSelectedRow] = useState(null);
+
+  const openModal = (row) => {
+    setSelectedRow(row);
+    setModalVisible(true);
+  };
+
+  const closeModal = () => {
+    setModalVisible(false);
+    setSelectedRow(null);
+  };
+
+
 
   const handleFilterChange = (column, value) => {
     setFilters({ ...filters, [column]: value.toLowerCase() });
@@ -92,11 +109,11 @@ export const TablePesquisa = ({ openModal }) => {
     return (
       row.ticket?.toString().includes(filters.ticket) &&
       (typeof row.categoria === 'string' ? row.categoria.toLowerCase() : '').includes(filters.categoria) &&
-        row.nomeEmpresa.toLowerCase().includes(filters.nomeEmpresa) &&
-        row.descricaoModulo.toLowerCase().includes(filters.descricaoModulo) &&
-        (typeof row.tecnico === 'string' ? row.tecnico.toLowerCase() : '').includes(filters.tecnico) &&
-        (typeof row.status === 'string' ? row.status.toLowerCase() : '').includes(filters.status)
-        // row.tecnico.toLowerCase().includes(filters.tecnico)
+      row.nomeEmpresa.toLowerCase().includes(filters.nomeEmpresa) &&
+      row.descricaoModulo.toLowerCase().includes(filters.descricaoModulo) &&
+      (typeof row.tecnico === 'string' ? row.tecnico.toLowerCase() : '').includes(filters.tecnico) &&
+      (typeof row.status === 'string' ? row.status.toLowerCase() : '').includes(filters.status)
+      // row.tecnico.toLowerCase().includes(filters.tecnico)
       // (typeof row.descricaoModulo === 'string' ? row.descricaoModulo.toLowerCase() : '').includes(filters.descricaoModulo) &&
       // (typeof row.status === 'string' ? row.status.toLowerCase() : '').includes(filters.status)
     );
@@ -353,7 +370,7 @@ export const TablePesquisa = ({ openModal }) => {
             <strong>Pesquisar Ticket</strong>
           </CCardHeader>
 
-          <ButtonSelect onSelectedOptionsChange={handleSelectedOptionsChange}/>
+          <ButtonSelect onSelectedOptionsChange={handleSelectedOptionsChange} />
 
           <CInputGroup className="mb-3" style={{ marginLeft: '22px' }}>
             <CCol md={2}>
@@ -381,41 +398,47 @@ export const TablePesquisa = ({ openModal }) => {
                 <option value="100">100</option>
               </CFormSelect>
             </CCol>
-            <ButtonToggle setFilter={setToggle} />
-            <CButton
-              color="terciary"
-              type="submit"
-              onMouseDown={handleMouseDown}
-              onMouseUp={handleMouseUp}
-              onClick={() => {
-                fetchMerges();
-              }}
-              disabled={isLoading}
-              style={{
-                height: '36px',
-                backgroundColor: '#2E8B57',
-                borderColor: '#2E8B57',
-                color: 'white',
-                borderRadius: '8px',
-                marginLeft: '20px',
-                marginTop: '32px',
-                padding: '0 12px',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                transition: 'transform 0.2s ease',
-                transform: isPressed ? 'scale(0.95)' : 'scale(1)',
-              }}
-            >
-              {isLoading ? (
-                <>
-                  <span className="spinner-border spinner-border-sm" aria-hidden="true"></span>
-                  <span role="status" style={{ marginLeft: '8px' }}>Carregando...</span>
-                </>
-              ) : (
-                'Filtrar'
-              )}
-            </CButton>
+
+            <CCol md={2} style={{ width: '80px' }}>
+              <ButtonToggle setFilter={setToggle} />
+            </CCol>
+
+            <CCol md={2} style={{ marginLeft: '15px', width: '80px' }}>
+              <CButton
+                color="terciary"
+                type="submit"
+                onMouseDown={handleMouseDown}
+                onMouseUp={handleMouseUp}
+                onClick={() => {
+                  fetchMerges();
+                }}
+                disabled={isLoading}
+                style={{
+                  height: '36px',
+                  backgroundColor: '#2E8B57',
+                  borderColor: '#2E8B57',
+                  color: 'white',
+                  borderRadius: '8px',
+                  marginLeft: '20px',
+                  marginTop: '32px',
+                  padding: '0 12px',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  transition: 'transform 0.2s ease',
+                  transform: isPressed ? 'scale(0.95)' : 'scale(1)',
+                }}
+              >
+                {isLoading ? (
+                  <>
+                    <span className="spinner-border spinner-border-sm" aria-hidden="true"></span>
+                    <span role="status" style={{ marginLeft: '8px' }}>Carregando...</span>
+                  </>
+                ) : (
+                  'Filtrar'
+                )}
+              </CButton>
+            </CCol>
           </CInputGroup>
 
           <CCardBody>
@@ -554,6 +577,9 @@ export const TablePesquisa = ({ openModal }) => {
                       <CTableDataCell  >{row.tecnico}</CTableDataCell>
                       <CTableDataCell>{row.status}</CTableDataCell>
                       <CTableDataCell>{formatDate(row.data)}</CTableDataCell>
+                      <CTableDataCell>
+                        <ButtonPesquisa openModal={() => openModal(row)} />
+                      </CTableDataCell>
                     </CTableRow>
                   </React.Fragment>
                 ))}
@@ -590,6 +616,15 @@ export const TablePesquisa = ({ openModal }) => {
             </CCol>
           </CCardBody>
         </CCard>
+
+        <CModal visible={modalVisible} onClose={closeModal} size="xl">
+          <CModalHeader closeButton>
+            <h5>O.S: {selectedRow?.ticket}</h5>
+          </CModalHeader>
+          <CModalBody>
+            <TelaPesquisa row={selectedRow}/>
+          </CModalBody>
+        </CModal>
       </CCol>
     </CRow>
   );

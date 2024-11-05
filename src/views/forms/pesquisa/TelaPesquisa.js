@@ -1,6 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 
-import { NumericFormat } from 'react-number-format';
 import {
   CButton,
   CCard,
@@ -8,225 +7,235 @@ import {
   CCardHeader,
   CCol,
   CForm,
-  CFormCheck,
   CFormInput,
   CFormFeedback,
   CFormLabel,
-  CFormSelect,
-  CFormTextarea,
-  CInputGroup,
-  CInputGroupText,
+  CNav,
+  CNavItem,
+  CNavLink,
+  CTabContent,
+  CTabPane,
   CRow,
-  CWidgetStatsC,
-} from '@coreui/react'
+  CInputGroup,
+} from '@coreui/react';
 
-import CIcon from '@coreui/icons-react'
-import { cilDelete, cilSearch, cilSpeech } from '@coreui/icons'
 import ButtonCadastro from '../../buttons/button-groups/ButtonCadastro';
 
-export const TelaPesquisa = ({ closeModal }) => {
+export const TelaPesquisa = ({ closeModal, row }) => {
 
-  const [validated, setValidated] = useState(false)
+  const [validated, setValidated] = useState(false);
+  const [activeKey, setActiveKey] = useState(1); // Estado para controlar as abas
   const obrigatorio = 'Esse campo é obrigatório.';
 
   const handleSubmit = (event) => {
-    const form = event.currentTarget
+    const form = event.currentTarget;
     if (form.checkValidity() === false) {
-      event.preventDefault()
-      event.stopPropagation()
+      event.preventDefault();
+      event.stopPropagation();
     }
-    setValidated(true)
-  }
+    setValidated(true);
+  };
 
   const handleCancel = () => {
     closeModal();
   };
 
+  console.log('row:', row);
+
+  const formatHtmlToText = (html) => {
+    if (!html) return '';
+
+    return html
+      .replace(/(\d{2}\/\d{2}\/\d{4} \d{2}:\d{2}:\d{2})/g, '<strong>$1<strong>')
+      .replace(/<p[^>]*>/g, '')
+      .replace(/<\/p>/g, '\n')
+      .replace(/<br\s*\/?>/gi, '\n')
+      .replace(/<[^>]+>/g, '')
+      .replace(/#!html/g, '')
+      .replace(/{{{/g, '')
+      .replace(/}}}/g, '');
+  };
+
+  // { { {
+// #!html
+
+ const formattedText = formatHtmlToText(row?.detalhesAtendimento);
+ const formattedRequisito = formatHtmlToText(row?.requisito);
+
+
   return (
     <CRow>
       <CCol xs={12}>
-        <CCard className="mb-4">
-          <CCardHeader>
-            <strong>Tabela de Motoristas</strong>
-          </CCardHeader>
+        <CForm
+          className="row g-3 needs-validation"
+          noValidate
+          validated={validated}
+          onSubmit={handleSubmit}
+        >
+          {/* Inputs desabilitados */}
+          <CCol md={3}>
+            <CFormLabel htmlFor="validationCustom05">Cliente:</CFormLabel>
+            <CFormInput value={row?.nomeEmpresa} type="text" id="validationCustom05" required disabled />
+            <CFormFeedback invalid>{obrigatorio}</CFormFeedback>
+          </CCol>
+          <CCol md={3}>
+            <CFormLabel htmlFor="validationCustom05">CNPJ:</CFormLabel>
+            <CFormInput value={row?.cgc}  type="text" id="validationCustom05" required disabled />
+            <CFormFeedback invalid>{obrigatorio}</CFormFeedback>
+          </CCol>
+          <CCol md={2}>
+            <CFormLabel htmlFor="validationCustom05">Municipio:</CFormLabel>
+            <CFormInput type="text" id="validationCustom05" required disabled />
+            <CFormFeedback invalid>{obrigatorio}</CFormFeedback>
+          </CCol>
+          <CCol md={2}>
+            <CFormLabel htmlFor="validationCustom05">Responsável:</CFormLabel>
+            <CFormInput type="text" id="validationCustom05" required disabled />
+            <CFormFeedback invalid>{obrigatorio}</CFormFeedback>
+          </CCol>
+          <CCol md={2}>
+            <CFormLabel htmlFor="validationCustom05">Contato:</CFormLabel>
+            <CFormInput value={row?.contato} type="text" id="validationCustom05" required disabled />
+            <CFormFeedback invalid>{obrigatorio}</CFormFeedback>
+          </CCol>
 
-          <CCardBody>
-            <CForm
-              className="row g-3 needs-validation"
-              noValidate
-              validated={validated}
-              onSubmit={handleSubmit}
-            >
-                <CCol md={12}>
-                  <CFormLabel htmlFor="validationCustom01">Cliente/Fornecedor</CFormLabel>
-                  <CInputGroup>
-                    <CButton
-                      type="button"
-                      color="secondary"
-                      variant="ghost"
-                      id="inputGroupFileAddon03"
-                      style={{
-                        height: '40px',
-                        width: '40px',
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        backgroundColor: '#3d99f5',
-                      }}
+          <CCol md={3}>
+            <CFormLabel htmlFor="validationCustom05">Produto:</CFormLabel>
+            <CFormInput value={row?.produto} type="text" id="validationCustom05" required disabled />
+            <CFormFeedback invalid>{obrigatorio}</CFormFeedback>
+          </CCol>
+          <CCol md={3}>
+            <CFormLabel htmlFor="validationCustom05">Módulos:</CFormLabel>
+            <CFormInput value={row?.descricaoModulo} type="text" id="validationCustom05" required disabled />
+            <CFormFeedback invalid>{obrigatorio}</CFormFeedback>
+          </CCol>
+          <CCol md={3}>
+            <CFormLabel htmlFor="validationCustom05">Categoria:</CFormLabel>
+            <CFormInput value={row?.categoria} type="text" id="validationCustom05" required disabled />
+            <CFormFeedback invalid>{obrigatorio}</CFormFeedback>
+          </CCol>
+          <CCol md={3}>
+            <CFormLabel htmlFor="validationCustom05">Técnico:</CFormLabel>
+            <CFormInput value={row?.tecnico} type="text" id="validationCustom05" required disabled />
+            <CFormFeedback invalid>{obrigatorio}</CFormFeedback>
+          </CCol>
+
+          <CCol md={3}>
+            <CFormLabel htmlFor="validationCustom05">Situação:</CFormLabel>
+            <CFormInput value={row?.status} type="text" id="validationCustom05" required disabled />
+            <CFormFeedback invalid>{obrigatorio}</CFormFeedback>
+          </CCol>
+          <CCol md={3}>
+            <CFormLabel htmlFor="validationCustom05">Atendimento:</CFormLabel>
+            <CFormInput type="text" id="validationCustom05" required disabled />
+            <CFormFeedback invalid>{obrigatorio}</CFormFeedback>
+          </CCol>
+          <CCol md={3}>
+            <CFormLabel htmlFor="validationCustom05">Data:</CFormLabel>
+            <CFormInput value={row?.data} type="text" id="validationCustom05" required disabled />
+            <CFormFeedback invalid>{obrigatorio}</CFormFeedback>
+          </CCol>
+
+          <CCol xs={12}>
+            <CCard>
+              <CCardHeader>
+                <CNav variant="tabs">
+                  <CNavItem>
+                    <CNavLink
+                      active={activeKey === 1}
+                      onClick={() => setActiveKey(1)}
                     >
-                      <CIcon
-                        icon={cilSearch}
-                        style={{
-                          height: '20px',
-                          width: '20px',
-                          backgroundColor: '#3d99f5',
-                          '--ci-primary-color': 'white',
-                        }}
-                      />
-                    </CButton>
-                    <CFormInput
-                      type="text"
-                      id="validationCustom01"
-                      defaultValue="Mark"
-                      required
-                    />
-                    <CButton
-                      type="button"
-                      color="secondary"
-                      variant="ghost"
-                      id="inputGroupFileAddon03"
-                      style={{
-                        height: '40px',
-                        width: '40px',
-                        backgroundColor: 'red',
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                      }}
+                      Descrição
+                    </CNavLink>
+                  </CNavItem>
+                  <CNavItem>
+                    <CNavLink
+                      active={activeKey === 2}
+                      onClick={() => setActiveKey(2)}
                     >
-                      <CIcon
-                        icon={cilDelete}
-                        style={{
-                          height: '20px',
-                          width: '20px',
-                          '--ci-primary-color': 'white',
-                        }}
-                      />
-                    </CButton>
+                      Movimentações
+                    </CNavLink>
+                  </CNavItem>
+                  <CNavItem>
+                    <CNavLink
+                      active={activeKey === 3}
+                      onClick={() => setActiveKey(3)}
+                    >
+                      Cadastro Cliente
+                    </CNavLink>
+                  </CNavItem>
+                  <CNavItem>
+                    <CNavLink
+                      active={activeKey === 4}
+                      onClick={() => setActiveKey(4)}
+                    >
+                      Trac
+                    </CNavLink>
+                  </CNavItem>
+                  <CNavItem>
+                    <CNavLink
+                      active={activeKey === 5}
+                      onClick={() => setActiveKey(5)}
+                    >
+                      Requisitos
+                    </CNavLink>
+                  </CNavItem>
+                </CNav>
+              </CCardHeader>
+              <CCardBody>
+                <CTabContent>
+                  <CTabPane role="tabpanel" visible={activeKey === 1}>
 
-                    <CFormFeedback valid></CFormFeedback>
-                  </CInputGroup>
-                </CCol>
+                    <CInputGroup className="mb-3">
+                      <CCol md={6} className="me-3">
+                        <CFormLabel htmlFor="exampleFormControlTextarea1">Descrição dos Serviços:</CFormLabel>
+                        <textarea className="form-control" id="exampleFormControlTextarea1" rows="10" value={row?.descricaoServicos}></textarea>
+                      </CCol>
+                      <CCol md={5} style={{width:'520px'}}>
+                        <CFormLabel htmlFor="exampleFormControlTextarea1">Detalhes do Atendimento</CFormLabel>
+                        <textarea className="form-control" id="exampleFormControlTextarea1" rows="10" value={formattedText}></textarea>
+                      </CCol>
+                      <CCol md={6}>
+                        <CFormLabel htmlFor="validationCustom05">Observação:</CFormLabel>
+                        <textarea className="form-control" id="exampleFormControlTextarea1" rows="1" value={row?.observacao}></textarea>
+                      </CCol>
+                      <CCol md={6} className="me-3">
+                        <CFormLabel htmlFor="exampleFormControlTextarea1">Solução:</CFormLabel>
+                        <textarea className="form-control" id="exampleFormControlTextarea1" rows="5" value={row?.solucao}></textarea>
+                      </CCol>
+                      <CCol md={5} style={{ width: '520px' }}>
+                        <CFormLabel htmlFor="exampleFormControlTextarea1">Detalhes do Cliente:</CFormLabel>
+                        <textarea className="form-control" id="exampleFormControlTextarea1" rows="5" value={row?.detalheCliente}></textarea>
+                      </CCol>
+                    </CInputGroup>
 
-              <CCol md={6}>
-                <CFormLabel htmlFor="validationCustomUsername">Forma de Pagamento</CFormLabel>
-                <CInputGroup>
-                  <CButton
-                    type="button"
-                    color="secondary"
-                    variant="ghost"
-                    id="inputGroupFileAddon03"
-                    style={{
-                      height: '40px',
-                      width: '40px',
-                      display: 'flex',
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                      backgroundColor: '#249542',
-                    }}
-                  >
-                    <CIcon
-                      icon={cilSearch}
-                      size="lg"
-                      style={{
-                        height: '20px',
-                        width: '20px',
-                        '--ci-primary-color': 'white',
-                      }}
-                    />
-                  </CButton>
-                  <CFormSelect id="validationCustom04">
-                    <option disabled>Choose...</option>
-                    <option>...</option>
-                  </CFormSelect>
-                </CInputGroup>
-                <CFormFeedback invalid>Please provide a valid option.</CFormFeedback>
-              </CCol>
 
-              <CCol md={2}>
-                <CFormLabel htmlFor="validationCustom05">Número Identificador</CFormLabel>
-                <CFormInput type="text" id="validationCustom05" required />
-                <CFormFeedback invalid>{obrigatorio}</CFormFeedback>
-              </CCol>
+                  </CTabPane>
+                  <CTabPane role="tabpanel" visible={activeKey === 2}>
+                    <p>Conteúdo da Aba 2</p>
+                  </CTabPane>
+                  <CTabPane role="tabpanel" visible={activeKey === 3}>
+                    <p>Conteúdo da Aba 3</p>
+                  </CTabPane>
+                  <CTabPane role="tabpanel" visible={activeKey === 4}>
+                    <CCol md={12}>
+                      <CFormLabel htmlFor="exampleFormControlTextarea1">Trac:</CFormLabel>
+                      <textarea className="form-control" id="exampleFormControlTextarea1" rows="15" value={row?.commit}></textarea>
+                    </CCol>
+                  </CTabPane>
+                  <CTabPane role="tabpanel" visible={activeKey === 5}>
+                    <CCol md={12}>
+                      <CFormLabel htmlFor="exampleFormControlTextarea1">Requisitos:</CFormLabel>
+                      <textarea className="form-control" id="exampleFormControlTextarea1" rows="25" value={formattedRequisito}></textarea>
+                    </CCol>
+                  </CTabPane>
+                </CTabContent>
+              </CCardBody>
+            </CCard>
+          </CCol>
 
-              <CCol md={2}>
-                <CFormLabel htmlFor="validationCustom05">Número Documento</CFormLabel>
-                <CFormInput type="text" id="validationCustom05" required />
-                <CFormFeedback invalid>{obrigatorio}</CFormFeedback>
-              </CCol>
-
-              <CCol md={2}>
-                <CFormLabel htmlFor="validationCustom05">Valor</CFormLabel>
-                <NumericFormat
-                  id="validationCustom05"
-                  customInput={CFormInput}
-                  thousandSeparator="."
-                  decimalSeparator=","
-                  prefix="R$ "
-                  decimalScale={2}
-                  fixedDecimalScale={true}
-                  allowNegative={false}
-                  required
-                />
-                <CFormFeedback invalid>{obrigatorio}</CFormFeedback>
-              </CCol>
-
-              <CCol md={2}>
-                <CFormLabel htmlFor="validationCustom05">Parcelas</CFormLabel>
-                <CFormInput type="text" id="validationCustom05" />
-              </CCol>
-
-              <CCol md={2}>
-                <CFormLabel htmlFor="validationCustom05">Competência</CFormLabel>
-                <CFormInput type="date" id="validationCustom05" required />
-                <CFormFeedback invalid>{obrigatorio}</CFormFeedback>
-              </CCol>
-              <CCol md={2}>
-                <CFormLabel htmlFor="validationCustom05">Emissão</CFormLabel>
-                <CFormInput type="date" id="validationCustom05" required />
-                <CFormFeedback invalid>{obrigatorio}</CFormFeedback>
-              </CCol>
-
-              <CCol md={6}>
-                <CFormLabel htmlFor="validationCustom05">Observação</CFormLabel>
-                <CFormInput type="text" id="validationCustom05" />
-              </CCol>
-
-              {/* <CCol xs={3} lg={4} xxl={2}>
-        <CWidgetStatsC
-          color="info"
-          icon={<CIcon icon={cilSpeech} height={36} />}
-          value="972"
-          title="Saldo"
-          inverse
-          progress={{ value: 75 }}
-        />
-      </CCol> */}
-
-              {/* lg={4} xxl={2} */}
-
-              {/* <CCol xs={12}> */}
-
-              {/* </CCol> */}
-              <ButtonCadastro handleCancel={handleCancel} />
-
-            </CForm>
-          </CCardBody>
-        </CCard>
+        </CForm>
       </CCol>
     </CRow>
   );
-
-}
-
-
+};

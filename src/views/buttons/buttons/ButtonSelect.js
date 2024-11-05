@@ -93,36 +93,75 @@ const ButtonSelect = ({onSelectedOptionsChange}) => {
     };
 
     const filtroOpcoes = [
-        { value: 'descricaoServicos', label: 'Descrição dos Serviços', color: '#00B8D9', isFixed: false },
-        { value: 'detalhesAtendimento', label: 'Detalhes do Atendimento', color: '#0052CC', isDisabled: false },
-        { value: 'solucao', label: 'Solução', color: '#5243AA' },
-        { value: 'detalheCliente', label: 'Detalhes do Cliente', color: '#FF5630', isFixed: false },
-        { value: 'observacao', label: 'Observação', color: '#FF8B00' },
-        { value: 'contato', label: 'Contato', color: '#FFC400' },
-        { value: 'commit', label: 'Commit', color: '#36B37E' },
-        { value: 'ticket', label: 'Ticket', color: '#36B37E' },
-        { value: 'empresa', label: 'Codigo SGSCli', color: '#36B37E' },
-        { value: 'codigoCliente', label: 'Codigo Cadcli', color: '#36B37E' },
-        { value: 'cgc', label: 'CNPJ', color: '#36B37E' },
-        { value: 'tecnico', label: 'Técnico', color: '#36B37E' },
-        { value: 'tecnico', label: 'Técnico Responsável', color: '#36B37E' },
+        {
+            label: "Cliente",
+            options: [
+                { value: 'empresa', label: 'Codigo SGSCli' },
+                { value: 'codigoCliente', label: 'Codigo Cadcli' },
+                { value: 'cgc', label: 'CNPJ' }
+            ],
+        },
+        {
+            label: "Detalhes",
+            options: [
+                { value: 'descricaoServicos', label: 'Descrição dos Serviços' },
+                { value: 'detalhesAtendimento', label: 'Detalhes do Atendimento' },
+                { value: 'solucao', label: 'Solução' },
+                { value: 'observacao', label: 'Observação' }
+            ],
+        },
+        {
+            label: "Técnico",
+            options: [
+                { value: 'tecnico', label: 'Técnico' },
+                { value: 'tecnico', label: 'Técnico Responsável' },
+                { value: 'contato', label: 'Contato' }
+            ],
+        },
+        {
+            label: "Outros",
+            options: [
+                { value: 'commit', label: 'Commit' },
+                { value: 'ticket', label: 'Ticket' }
+            ],
+        }
     ];
 
     const filtroOpcoes2 = [
-        { value: 'descricaoServicos', label: 'Descrição dos Serviços', color: '#00B8D9', isFixed: false },
-        { value: 'detalhesAtendimento', label: 'Detalhes do Atendimento', color: '#0052CC', isDisabled: false },
-        { value: 'solucao', label: 'Solução', color: '#5243AA' },
-        { value: 'detalheCliente', label: 'Detalhes do Cliente', color: '#FF5630', isFixed: false },
-        { value: 'observacao', label: 'Observação', color: '#FF8B00' },
-        { value: 'contato', label: 'Contato', color: '#FFC400' },
-        { value: 'commit', label: 'Commit', color: '#36B37E' },
-        { value: 'ticket', label: 'Ticket', color: '#36B37E' },
-        { value: 'empresa', label: 'Codigo SGSCli', color: '#36B37E' },
-        { value: 'codigoCliente', label: 'Codigo Cadcli', color: '#36B37E' },
-        { value: 'cgc', label: 'CNPJ', color: '#36B37E' },
-        { value: 'tecnico', label: 'Técnico', color: '#36B37E' },
-        { value: 'tecnico', label: 'Técnico Responsável', color: '#36B37E' },
+        {
+            label: "Cliente",
+            options: [
+                { value: 'empresa', label: 'Codigo SGSCli' },
+                { value: 'codigoCliente', label: 'Codigo Cadcli' },
+                { value: 'cgc', label: 'CNPJ' }
+            ],
+        },
+        {
+            label: "Detalhes",
+            options: [
+                { value: 'descricaoServicos', label: 'Descrição dos Serviços' },
+                { value: 'detalhesAtendimento', label: 'Detalhes do Atendimento' },
+                { value: 'solucao', label: 'Solução' },
+                { value: 'observacao', label: 'Observação' }
+            ],
+        },
+        {
+            label: "Técnico",
+            options: [
+                { value: 'tecnico', label: 'Técnico' },
+                { value: 'tecnico', label: 'Técnico Responsável' },
+                { value: 'contato', label: 'Contato' }
+            ],
+        },
+        {
+            label: "Outros",
+            options: [
+                { value: 'commit', label: 'Commit' },
+                { value: 'ticket', label: 'Ticket' }
+            ],
+        }
     ];
+
 
     const disableSelectedOptions = (options, selected) => {
         return options.map(option => ({

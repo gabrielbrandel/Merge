@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { CButton } from '@coreui/react';
+import { CButton, CFormLabel, CCol, CInputGroup } from '@coreui/react';
 
 const ButtonToggle = ({ setFilter }) => {
     const [status, setStatus] = useState(() => {
@@ -56,20 +56,24 @@ const ButtonToggle = ({ setFilter }) => {
 
     return (
         <div>
-            <CButton
-                style={{
-                    color: 'white',
-                    backgroundColor: getButtonColor(),
-                    height: '36px',
-                    borderRadius: '8px',
-                    marginLeft: '20px',
-                    marginTop: '32px',
-                    padding: '0 12px',
-                }}
-                onClick={toggleButton}
-            >
-                {getButtonText()}
-            </CButton>
+            <CInputGroup className="mb-3" style={{ marginLeft: '15px' }}>
+                <CFormLabel htmlFor="validationCustom05" >
+                    Status
+                </CFormLabel>
+                <CButton
+                    style={{
+                        color: 'white',
+                        backgroundColor: getButtonColor(),
+                        height: '36px',
+                        borderRadius: '8px',
+                        marginLeft: '0px',
+                        padding: '0 12px',
+                    }}
+                    onClick={toggleButton}
+                >
+                    {getButtonText()}
+                </CButton>
+            </CInputGroup>
         </div>
     );
 };
