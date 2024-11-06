@@ -11,3 +11,9 @@
   align-items: center;
   height: 100vh;
 }
+
+.custom-modal {
+  height: 200vh !important;
+  top: -15vw !important;
+  transform: scale(0.6) !important;
+}

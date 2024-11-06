@@ -56,9 +56,6 @@ export const TelaPesquisa = ({ closeModal, row }) => {
       .replace(/}}}/g, '');
   };
 
-  // { { {
-// #!html
-
  const formattedText = formatHtmlToText(row?.detalhesAtendimento);
  const formattedRequisito = formatHtmlToText(row?.requisito);
 
@@ -72,7 +69,6 @@ export const TelaPesquisa = ({ closeModal, row }) => {
           validated={validated}
           onSubmit={handleSubmit}
         >
-          {/* Inputs desabilitados */}
           <CCol md={3}>
             <CFormLabel htmlFor="validationCustom05">Cliente:</CFormLabel>
             <CFormInput value={row?.nomeEmpresa} type="text" id="validationCustom05" required disabled />
@@ -153,29 +149,13 @@ export const TelaPesquisa = ({ closeModal, row }) => {
                       active={activeKey === 2}
                       onClick={() => setActiveKey(2)}
                     >
-                      Movimentações
+                      Commit
                     </CNavLink>
                   </CNavItem>
                   <CNavItem>
                     <CNavLink
                       active={activeKey === 3}
                       onClick={() => setActiveKey(3)}
-                    >
-                      Cadastro Cliente
-                    </CNavLink>
-                  </CNavItem>
-                  <CNavItem>
-                    <CNavLink
-                      active={activeKey === 4}
-                      onClick={() => setActiveKey(4)}
-                    >
-                      Trac
-                    </CNavLink>
-                  </CNavItem>
-                  <CNavItem>
-                    <CNavLink
-                      active={activeKey === 5}
-                      onClick={() => setActiveKey(5)}
                     >
                       Requisitos
                     </CNavLink>
@@ -189,11 +169,11 @@ export const TelaPesquisa = ({ closeModal, row }) => {
                     <CInputGroup className="mb-3">
                       <CCol md={6} className="me-3">
                         <CFormLabel htmlFor="exampleFormControlTextarea1">Descrição dos Serviços:</CFormLabel>
-                        <textarea className="form-control" id="exampleFormControlTextarea1" rows="10" value={row?.descricaoServicos}></textarea>
+                        <textarea className="form-control" id="exampleFormControlTextarea1" rows="7" value={row?.descricaoServicos}></textarea>
                       </CCol>
                       <CCol md={5} style={{width:'520px'}}>
                         <CFormLabel htmlFor="exampleFormControlTextarea1">Detalhes do Atendimento</CFormLabel>
-                        <textarea className="form-control" id="exampleFormControlTextarea1" rows="10" value={formattedText}></textarea>
+                        <textarea className="form-control" id="exampleFormControlTextarea1" rows="7" value={formattedText}></textarea>
                       </CCol>
                       <CCol md={6}>
                         <CFormLabel htmlFor="validationCustom05">Observação:</CFormLabel>
@@ -201,32 +181,26 @@ export const TelaPesquisa = ({ closeModal, row }) => {
                       </CCol>
                       <CCol md={6} className="me-3">
                         <CFormLabel htmlFor="exampleFormControlTextarea1">Solução:</CFormLabel>
-                        <textarea className="form-control" id="exampleFormControlTextarea1" rows="5" value={row?.solucao}></textarea>
+                        <textarea className="form-control" id="exampleFormControlTextarea1" rows="3" value={row?.solucao}></textarea>
                       </CCol>
                       <CCol md={5} style={{ width: '520px' }}>
                         <CFormLabel htmlFor="exampleFormControlTextarea1">Detalhes do Cliente:</CFormLabel>
-                        <textarea className="form-control" id="exampleFormControlTextarea1" rows="5" value={row?.detalheCliente}></textarea>
+                        <textarea className="form-control" id="exampleFormControlTextarea1" rows="3" value={row?.detalheCliente}></textarea>
                       </CCol>
                     </CInputGroup>
 
 
                   </CTabPane>
                   <CTabPane role="tabpanel" visible={activeKey === 2}>
-                    <p>Conteúdo da Aba 2</p>
-                  </CTabPane>
-                  <CTabPane role="tabpanel" visible={activeKey === 3}>
-                    <p>Conteúdo da Aba 3</p>
-                  </CTabPane>
-                  <CTabPane role="tabpanel" visible={activeKey === 4}>
                     <CCol md={12}>
-                      <CFormLabel htmlFor="exampleFormControlTextarea1">Trac:</CFormLabel>
+                      <CFormLabel htmlFor="exampleFormControlTextarea1">Trac: {row?.owner}</CFormLabel>
                       <textarea className="form-control" id="exampleFormControlTextarea1" rows="15" value={row?.commit}></textarea>
                     </CCol>
                   </CTabPane>
-                  <CTabPane role="tabpanel" visible={activeKey === 5}>
+                  <CTabPane role="tabpanel" visible={activeKey === 3}>
                     <CCol md={12}>
                       <CFormLabel htmlFor="exampleFormControlTextarea1">Requisitos:</CFormLabel>
-                      <textarea className="form-control" id="exampleFormControlTextarea1" rows="25" value={formattedRequisito}></textarea>
+                      <textarea className="form-control" id="exampleFormControlTextarea1" rows="15" value={formattedRequisito}></textarea>
                     </CCol>
                   </CTabPane>
                 </CTabContent>

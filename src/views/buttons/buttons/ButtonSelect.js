@@ -98,7 +98,8 @@ const ButtonSelect = ({onSelectedOptionsChange}) => {
             options: [
                 { value: 'empresa', label: 'Codigo SGSCli' },
                 { value: 'codigoCliente', label: 'Codigo Cadcli' },
-                { value: 'cgc', label: 'CNPJ' }
+                { value: 'cgc', label: 'CNPJ' },
+                { value: 'nomeEmpresa', label: 'Nome Empresa' }
             ],
         },
         {
@@ -122,7 +123,9 @@ const ButtonSelect = ({onSelectedOptionsChange}) => {
             label: "Outros",
             options: [
                 { value: 'commit', label: 'Commit' },
-                { value: 'ticket', label: 'Ticket' }
+                { value: 'ticket', label: 'Ticket' },
+                { value: 'requisito', label: 'Requisito' },
+                { value: 'descricaoEquipe', label: 'Equipe' }
             ],
         }
     ];
@@ -131,33 +134,36 @@ const ButtonSelect = ({onSelectedOptionsChange}) => {
         {
             label: "Cliente",
             options: [
-                { value: 'empresa', label: 'Codigo SGSCli' },
-                { value: 'codigoCliente', label: 'Codigo Cadcli' },
-                { value: 'cgc', label: 'CNPJ' }
+                { value: 'empresa2', label: 'Codigo SGSCli' },
+                { value: 'codigoCliente2', label: 'Codigo Cadcli' },
+                { value: 'cgc2', label: 'CNPJ' },
+                { value: 'nomeEmpresa2', label: 'Nome Empresa' }
             ],
         },
         {
             label: "Detalhes",
             options: [
-                { value: 'descricaoServicos', label: 'Descrição dos Serviços' },
-                { value: 'detalhesAtendimento', label: 'Detalhes do Atendimento' },
-                { value: 'solucao', label: 'Solução' },
-                { value: 'observacao', label: 'Observação' }
+                { value: 'descricaoServicos2', label: 'Descrição dos Serviços' },
+                { value: 'detalhesAtendimento2', label: 'Detalhes do Atendimento' },
+                { value: 'solucao2', label: 'Solução' },
+                { value: 'observacao2', label: 'Observação' }
             ],
         },
         {
             label: "Técnico",
             options: [
-                { value: 'tecnico', label: 'Técnico' },
-                { value: 'tecnico', label: 'Técnico Responsável' },
+                { value: 'tecnico2', label: 'Técnico' },
+                { value: 'tecnico2', label: 'Técnico Responsável' },
                 { value: 'contato', label: 'Contato' }
             ],
         },
         {
             label: "Outros",
             options: [
-                { value: 'commit', label: 'Commit' },
-                { value: 'ticket', label: 'Ticket' }
+                { value: 'commit2', label: 'Commit' },
+                { value: 'ticket2', label: 'Ticket' },
+                { value: 'requisito2', label: 'Requisito' },
+                { value: 'descricaoEquipe2', label: 'Equipe' }
             ],
         }
     ];
@@ -239,22 +245,6 @@ const ButtonSelect = ({onSelectedOptionsChange}) => {
                                 onChange={(e) => handleChangeFiltro1(e.target.value)}
                                 value={filtro1}
                             />
-                            <CButton
-                                color="primary"
-                                style={{
-                                    height: '40px',
-                                    backgroundColor: '#4682B4',
-                                    borderColor: '#4682B4',
-                                    color: 'white',
-                                    display: 'flex',
-                                    justifyContent: 'center',
-                                    alignItems: 'center',
-                                    marginTop: '30px',
-                                }}
-                            // onClick={exportToExcel}
-                            >
-                                Cliente
-                            </CButton>
                         </CInputGroup>
                     </CCol>
                 </CRow>
@@ -296,22 +286,6 @@ const ButtonSelect = ({onSelectedOptionsChange}) => {
                                 onChange={(e) => handleChangeFiltro2(e.target.value)}
                                 value={filtro2}
                             />
-                            <CButton
-                                color="primary"
-                                style={{
-                                    height: '40px',
-                                    backgroundColor: '#4682B4',
-                                    borderColor: '#4682B4',
-                                    color: 'white',
-                                    display: 'flex',
-                                    justifyContent: 'center',
-                                    alignItems: 'center',
-                                    marginTop: '30px',
-                                }}
-                            // onClick={exportToExcel}
-                            >
-                                Cliente
-                            </CButton>
                         </CInputGroup>
                     </CCol>
                 </CRow>

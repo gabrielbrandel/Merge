@@ -35,6 +35,8 @@ import Select from 'react-select';
 import ButtonToggle from '../../buttons/buttons/ButtonToggle';
 import ButtonSelect from '../../buttons/buttons/ButtonSelect';
 import { TelaPesquisa } from '../../forms/pesquisa/TelaPesquisa';
+import '../../../../src/scss/_custom'
+import useMediaQuery from './hooks/useMediaQuery';
 
 const today = new Date().toISOString().split('T')[0];
 const firstDay = new Date(new Date().getFullYear(), new Date().getMonth(), 1).toISOString().split('T')[0];
@@ -84,6 +86,16 @@ export const TablePesquisa = () => {
     setSelectedRow(null);
   };
 
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  // const isSmallScreen = useMediaQuery('(max-width: 400px)');
+  const isSmallScreen = useMediaQuery('(max-width: 1600px) and (max-height: 899px)');
 
 
   const handleFilterChange = (column, value) => {
@@ -173,14 +185,19 @@ export const TablePesquisa = () => {
     try {
       setIsLoading(true);
 
-      localStorage.setItem('rows', JSON.stringify([]));
-
       const camposNumericos = ["empresa", "codigoCliente", "ticket", "codigoCategoria"];
 
       let query = 'Consulta/sgps';
-      if (startDate && endDate) {
-        query += `?startDate=${startDate}&endDate=${endDate}`;
+
+      if (!startDate) {
+        setStartDate('2015-01-01');
       }
+
+      if (!endDate) {
+        setEndDate(today);
+      }
+
+      query += `?startDate=${startDate}&endDate=${endDate}`;
 
       const selectedOptions1String = selectedOptions.selectedOptions1
         .map(option => {
@@ -206,6 +223,7 @@ export const TablePesquisa = () => {
 
       const resultString = `${selectedOptions1String}${selectedOptions2String}`;
 
+      console.log('result:', resultString);
       if (toggle && toggle.trim() !== '') {
         if (toggle === 'Abertas') {
           query += `&statusAberto=1`;
@@ -215,11 +233,13 @@ export const TablePesquisa = () => {
       }
 
       query += resultString;
-      console.log('result:', query);
 
       const response = await axiosInstance.get(query);
       const fetchedRows = response.data.data || [];
 
+      // saveRowsToLocalStorage(fetchedRows);
+
+      // localStorage.removeItem('rows');
       localStorage.setItem('rows', JSON.stringify(fetchedRows));
       setRows(response.data.data);
 
@@ -230,6 +250,16 @@ export const TablePesquisa = () => {
     }
   };
 
+  // const saveRowsToLocalStorage = (rows) => {
+  //   try {
+  //     localStorage.setItem('rows', JSON.stringify(rows));
+  //   } catch (e) {
+  //     if (e.name === 'QuotaExceededError') {
+  //       console.warn('LocalStorage quota exceeded, removing rows...');
+  //       localStorage.removeItem('rows');
+  //     }
+  //   }
+  // };
 
   useEffect(() => {
     const savedRows = localStorage.getItem('rows');
@@ -617,12 +647,18 @@ export const TablePesquisa = () => {
           </CCardBody>
         </CCard>
 
-        <CModal visible={modalVisible} onClose={closeModal} size="xl">
+        <CModal
+          visible={modalVisible}
+          onClose={closeModal}
+          size="xl"
+          // className= "custom-modal"
+          {...(isSmallScreen && { className: "custom-modal" })}
+        >
           <CModalHeader closeButton>
             <h5>O.S: {selectedRow?.ticket}</h5>
           </CModalHeader>
           <CModalBody>
-            <TelaPesquisa row={selectedRow}/>
+            <TelaPesquisa row={selectedRow} />
           </CModalBody>
         </CModal>
       </CCol>
