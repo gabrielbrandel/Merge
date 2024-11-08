@@ -40,7 +40,7 @@ export const TelaPesquisa = ({ closeModal, row }) => {
     closeModal();
   };
 
-  console.log('row:', row);
+  // console.log('row:', row);
 
   const formatHtmlToText = (html) => {
     if (!html) return '';

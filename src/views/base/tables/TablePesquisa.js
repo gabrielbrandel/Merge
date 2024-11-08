@@ -223,7 +223,7 @@ export const TablePesquisa = () => {
 
       const resultString = `${selectedOptions1String}${selectedOptions2String}`;
 
-      console.log('result:', resultString);
+      // console.log('result:', resultString);
       if (toggle && toggle.trim() !== '') {
         if (toggle === 'Abertas') {
           query += `&statusAberto=1`;
@@ -389,7 +389,7 @@ export const TablePesquisa = () => {
 
   const handleSelectedOptionsChange = (newSelectedOptions) => {
     setSelectedOptions(newSelectedOptions);
-    console.log('filtros:', newSelectedOptions);
+    // console.log('filtros:', newSelectedOptions);
   };
 
   return (

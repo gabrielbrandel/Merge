@@ -93,8 +93,8 @@ const Dashboard = () => {
     { type: 'Erro', merges: totalOutros},
   ]
 
-  console.log( 'teste:', jsonErros );
-  console.log('teste:', naoprevisto );
+  // console.log( 'teste:', jsonErros );
+  // console.log('teste:', naoprevisto );
 
   const bugDeImpacto = progressMergePorCategoria.find(item => item.descricao === 'BUG DE IMPACTO');
   const bugSemImpacto = progressMergePorCategoria.find(item => item.descricao === 'BUG SEM IMPACTO');
